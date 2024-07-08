@@ -1,0 +1,104 @@
+/* 1px border less mixins */
+.border-1px (@color) {
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		// height: 200%;
+		width: 200%;
+		border: 1px solid @color;
+		transform-origin: left top;
+		transform: scale(0.5);
+		box-sizing: border-box;
+	};
+}
+
+
+.border-1px--top (@color) {
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		// height: 200%;
+		width: 200%;
+		border-top: 1px solid @color;
+		transform-origin: left top;
+		transform: scale(0.5);
+		box-sizing: border-box;
+	};
+}
+
+
+
+.border-1px--right (@color) {
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		// height: 200%;
+		width: 200%;
+		border-right: 1px solid @color;
+		transform-origin: left top;
+		transform: scale(0.5);
+		box-sizing: border-box;
+	};
+}
+
+
+
+.border-1px--bottom (@color) {
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		// height: 200%;
+		width: 200%;
+		border-bottom: 1px solid @color;
+		transform-origin: left top;
+		transform: scale(0.5);
+		box-sizing: border-box;
+	};
+}
+
+
+
+.border-1px--left (@color) {
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		// height: 200%;
+		width: 200%;
+		border-left: 1px solid @color;
+		transform-origin: left top;
+		transform: scale(0.5);
+		box-sizing: border-box;
+	};
+}
+
+
+/* text-overflow less mixins */
+.text-overflow (@line) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;  
+}
+
+
+
+
+
+
+
