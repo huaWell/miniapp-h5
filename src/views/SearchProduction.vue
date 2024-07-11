@@ -132,19 +132,19 @@
                 clearable
                 type="number"
                 value="10"
-                label="产线1工时"
+                label="产线1-工时"
             />
             <van-field
                 clearable
                 type="number"
                 value="10"
-                label="产线2工时"
+                label="关键模具"
             />
             <van-field
                 clearable
                 type="number"
                 value="10"
-                label="产线3工时"
+                label="关键人员"
             />
         </van-cell-group>
         <van-button class="my-van-button" type="primary" @click="confirmParam">确认</van-button>

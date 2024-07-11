@@ -15,7 +15,16 @@
 
     .strategy{
         background: #fff;
-        margin-top:16px
+        margin-top:16px;
+        width: 100vw;
+        .strategy-setting {
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            padding: 4px 16px;
+            box-sizing: border-box;
+        }
     }
 
     .chengben{
@@ -133,7 +142,7 @@
             </div>
         </div>
         <div class="strategy">
-            <div style="display: flex;align-items: center;justify-content: end;padding: 4px 16px;box-sizing: border-box;">
+            <div class="strategy-setting">
                 <van-icon color="#1989fa" name="setting" />
             </div>
           
