@@ -147,7 +147,17 @@ export default {
       })
     },
     onGenerator(){
-
+        let _this = this
+        this.$router.push({
+            path: "/capacityOccupancy",
+            query: {
+                data: JSON.stringify({
+                    productionName: _this.productionName,
+                    amount: _this.amount
+                })
+                
+            }
+        })
     }
       
     // async onGenerator() {

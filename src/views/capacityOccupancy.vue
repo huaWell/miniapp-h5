@@ -44,6 +44,25 @@
     }
   }
 }
+.fixPanel{
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .btn{
+    width: 50%;
+  }
+  .btn1{
+    background-color:  rgb(234, 234, 196);
+  }
+  .btn2{
+    background-color: rgb(25, 137, 250);
+  }
+}
 </style>
 
 
@@ -55,12 +74,21 @@
           {{ data.title }}
         </div>
         <div class="bar">
-          <div>设置</div>
-          <div>报价</div>
+          <div>
+            <van-icon color="#000" name="setting" />
+          </div>
+          <div @click="onSetQuotateStrategy">
+            <van-icon color="#1989fa" name="bill" />
+          </div>
         </div>
       </div>
-      <div>预计时间: {{ data.month }}</div>
+      <div>预计完成时间: {{ data.month }}</div>
       <Charts :options="option" chartId="chart1" />
+      <van-tabs type="card">
+          <van-tab title="周"></van-tab>
+          <van-tab title="旬"></van-tab>
+          <van-tab title="月"></van-tab>
+      </van-tabs>
     </div>
 
     <div class="card" style="height: 350px">
@@ -90,6 +118,10 @@
       <Charts :options="option2" chartId="chart4" />
     </div>
 
+    <div class="fixPanel">
+      <van-button class="btn btn1">策略</van-button>
+      <van-button class="btn btn2">确认</van-button>
+    </div>
   </div>
 </template>
 
@@ -134,7 +166,8 @@ export default {
     return {
       data: {
         title: "这是标题",
-        month: "2024-7月"
+        month: "2024-7月",
+        amount: 0
       },
       option: {
         legend: {
@@ -379,8 +412,27 @@ export default {
   },
   async mounted() {
     this.data.title = "产品名称";
+    console.log(this.$route.query.data)
+    var data = this.$route.query.data
+    if (data) {
+      data = JSON.parse(data)
+      this.data.title = data.productionName;
+      this.data.amount = data.amount
+    }
   },
   methods: {
+    onSetQuotateStrategy(){
+      let _this = this
+        this.$router.push({
+            path: "/quotate-strategy",
+            query: {
+                data: JSON.stringify({
+                    productionName: _this.data.title,
+                    amount: _this.data.amount
+                })
+            }
+        })
+    }
   }
 }
 </script>

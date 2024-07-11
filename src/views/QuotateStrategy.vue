@@ -19,7 +19,7 @@
     }
 
     .chengben{
-        background-color: #fff;
+        background-color: #ecedf1;
         padding: 16px;
         box-sizing: border-box;
         margin-top: 16px;
@@ -133,6 +133,10 @@
             </div>
         </div>
         <div class="strategy">
+            <div style="display: flex;align-items: center;justify-content: end;padding: 4px 16px;box-sizing: border-box;">
+                <van-icon color="#1989fa" name="setting" />
+            </div>
+          
             <van-radio-group v-model="radio"  @change="onChange" style="padding: 16px;font-size:14px">
             <van-radio name="1" icon-size="16">报价策略A</van-radio>
             <van-radio name="2" icon-size="16">报价策略B</van-radio>
@@ -185,7 +189,7 @@
             </div>
             <van-field
             clearable
-            v-model="amount"
+            v-model="lirun"
             placeholder="请输入利润"
             />
 
@@ -197,7 +201,7 @@
             </div>
             <van-field
             clearable
-            v-model="amount"
+            v-model="zhekou"
             placeholder="请输入折扣"
             />
         </div>
@@ -226,11 +230,19 @@ export default {
             radio: "1",
             productionName: "测试",
             amount: 100,
-            showInfo: false
+            showInfo: false,
+            lirun: '20%',
+            zhekou: "10%"
         }
     },
     mounted(){
-
+        console.log(this.$router.query)
+        var data = this.$route.query.data
+        if (data) {
+            data = JSON.parse(data)
+            this.productionName = data.productionName;
+            this.amount = data.amount
+        }
     },
     methods: {
         onChange(event) {
@@ -241,7 +253,7 @@ export default {
         onGenerator(){
             this.$toast.loading("计算中...")
             setTimeout(()=>{
-                this.$toast.success("100元", {duration: 2000})
+                this.$toast.success("100.000元", {duration: 2000})
             },2000)
         },
         onShowInfo(){
