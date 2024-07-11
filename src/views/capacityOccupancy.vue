@@ -55,11 +55,6 @@
           {{ data.title }}
         </div>
         <div class="bar">
-          <!-- <van-tabs type="card">
-            <van-tab title="周"></van-tab>
-            <van-tab title="旬"></van-tab>
-            <van-tab title="月"></van-tab>
-          </van-tabs> -->
           <div>设置</div>
           <div>报价</div>
         </div>
@@ -101,7 +96,6 @@
 <script>
 
 import Charts from '../components/Charts.vue';
-// import { vanTabs, vanTab } from 'vant';
 
 const colorConfig = {
   red: '#d4716e',
@@ -134,9 +128,7 @@ const grid = {
 export default {
   name: 'capacityOccupancy',
   components: {
-    Charts,
-    // [vanTabs.name]: vanTabs,
-    // [vanTab.name]: vanTab
+    Charts
   },
   data() {
     return {
