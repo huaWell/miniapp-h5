@@ -4,8 +4,8 @@
   height: 100vh;
   display: flex;
   gap: 8px;
-  padding: 8px;
-  box-sizing: border-box;
+  // padding: 8px;
+  // box-sizing: border-box;
   background-color: #f1f5fa !important;
   flex-direction: column;
   overflow: scroll;
@@ -55,6 +55,7 @@
   justify-content: center;
   .btn{
     width: 50%;
+    font-weight: 500;
   }
   .btn1{
     background-color:  rgb(234, 234, 196);
@@ -119,8 +120,8 @@
     </div>
 
     <div class="fixPanel">
-      <van-button class="btn btn1">策略</van-button>
-      <van-button class="btn btn2">确认</van-button>
+      <van-button class="btn btn1">策 略</van-button>
+      <van-button class="btn btn2">确 认</van-button>
     </div>
   </div>
 </template>
