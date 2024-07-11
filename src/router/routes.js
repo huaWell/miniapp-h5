@@ -240,4 +240,13 @@ export default [
       title: ''
     }
   },
+  {
+    path: '/capacityOccupancy',
+    name: 'capacityOccupancy',
+    component: () =>
+      import('../views/capacityOccupancy'),
+    meta: {
+      title: ''
+    }
+  }
 ]
