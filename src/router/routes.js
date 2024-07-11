@@ -3,13 +3,38 @@ export default [
     path: '/',
     name: 'Home',
     component: () =>
-      import('../views/HomeNew'),
+      import('../views/PublishOrder'),
     meta: {
       title: ''
     }
   },
-
-
+  {
+    path: '/publish-order',
+    name: 'PublishOrder',
+    component: () =>
+      import('../views/PublishOrder'),
+    meta: {
+      title: ''
+    }
+  },
+  {
+    path: '/search-production',
+    name: 'SearchProduction',
+    component: () =>
+      import('../views/SearchProduction'),
+    meta: {
+      title: ''
+    }
+  },
+  {
+    path: '/quotate-strategy',
+    name: 'QuotateStrategy',
+    component: () =>
+      import('../views/QuotateStrategy'),
+    meta: {
+      title: ''
+    }
+  },
   {
     path: '/circle-detail',
     name: 'CircleDetail',
