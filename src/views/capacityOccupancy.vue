@@ -18,7 +18,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     flex-shrink: 0;
 
     .title {
@@ -91,7 +91,7 @@
       </van-tabs>
     </div>
 
-    <div class="card" style="height: 350px">
+    <div class="card" style="height: 300px">
       <div class="title">
         <div class="value">
           延误订单
@@ -100,7 +100,7 @@
       <Charts :options="option1" chartId="chart2" />
     </div>
 
-    <div class="card" style="height: 350px">
+    <div class="card" style="height: 300px">
       <div class="title">
         <div class="value">
           资金流向
@@ -109,13 +109,13 @@
       <Charts :options="option2" chartId="chart3" />
     </div>
 
-    <div class="card" style="height: 350px">
+    <div class="card" style="height: 300px">
       <div class="title">
         <div class="value">
-          资金流向
+          客户变更统计
         </div>
       </div>
-      <Charts :options="option2" chartId="chart4" />
+      <Charts :options="option3" chartId="chart4" />
     </div>
 
     <div class="fixPanel">
@@ -152,9 +152,9 @@ for (let i = 0; i < rawData[0].length; ++i) {
 }
 const grid = {
   left: 50,
-  right: 30,
-  top: 50,
-  bottom: 40
+  right: 10,
+  top: 40,
+  bottom: 20
 };
 
 export default {
@@ -312,7 +312,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [200, 182, 151, 194, 300, 310, 290, 290]
+            data: [200, 182, 151, 194, 300, 310, 290]
           },
           {
             name: '预计',
@@ -349,21 +349,10 @@ export default {
         legend: {
           data: ['支出', '收入']
         },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
+        grid,
         xAxis: {
           type: 'category',
-          data: (function () {
-            let list = [];
-            for (let i = 1; i <= 11; i++) {
-              list.push('Nov ' + i);
-            }
-            return list;
-          })()
+          data: months
         },
         yAxis: {
           type: 'value'
@@ -387,7 +376,7 @@ export default {
             data: [0, 900, 1245, 1530, 1376, 1376, 1511, 1689, 1856, 1495, 1292]
           },
           {
-            name: 'Income',
+            name: '收入',
             type: 'bar',
             stack: 'Total',
             label: {
@@ -397,7 +386,7 @@ export default {
             data: [900, 345, 393, '-', '-', 135, 178, 286, '-', '-', '-']
           },
           {
-            name: 'Expenses',
+            name: '支出',
             type: 'bar',
             stack: 'Total',
             label: {
@@ -405,6 +394,29 @@ export default {
               position: 'bottom'
             },
             data: ['-', '-', '-', 108, 154, '-', '-', '-', 119, 361, 203]
+          }
+        ]
+      },
+
+      option3: {
+        xAxis: {
+          type: 'category',
+          data: months
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        grid,
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line'
           }
         ]
       }
