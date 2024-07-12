@@ -44,7 +44,8 @@
     }
   }
 }
-.fixPanel{
+
+.fixPanel {
   width: 100vw;
   position: fixed;
   bottom: 0;
@@ -53,16 +54,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  .btn{
+
+  .btn {
     width: 50%;
     font-weight: 500;
   }
-  .btn1{
-    background-color:  rgb(234, 234, 196);
+
+  .btn1 {
+    background-color: rgb(234, 234, 196);
   }
-  .btn2{
+
+  .btn2 {
     background-color: rgb(25, 137, 250);
   }
+}
+
+.custom-button {
+  width: 26px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 18px;
+  text-align: center;
+  background-color: #1989FA;
+  border-radius: 100px;
+}
+
+.slider-text {
+  position: absolute;
+  top: -3px;
+  font-size: 10px;
+  color: #fff;
+  pointer-events: none;
 }
 </style>
 
@@ -84,11 +106,20 @@
         </div>
       </div>
       <div>预计完成时间: {{ data.month }}</div>
+      <div style="position: relative;">
+        <van-slider v-model="value" bar-height="10px">
+          <template #button>
+            <div class="custom-button">{{ value }}</div>
+          </template>
+        </van-slider>
+        <div class="slider-text" style="left: 33%;">| 33%</div>
+        <div class="slider-text" style="left: 66%;">| 66%</div>
+      </div>
       <Charts :options="option" chartId="chart1" />
       <van-tabs type="card">
-          <van-tab title="周"></van-tab>
-          <van-tab title="旬"></van-tab>
-          <van-tab title="月"></van-tab>
+        <van-tab title="周"></van-tab>
+        <van-tab title="旬"></van-tab>
+        <van-tab title="月"></van-tab>
       </van-tabs>
     </div>
 
@@ -129,6 +160,7 @@
 <script>
 
 import Charts from '../components/Charts.vue';
+import { Slider } from 'vant';
 
 const colorConfig = {
   red: '#d4716e',
@@ -161,7 +193,8 @@ const grid = {
 export default {
   name: 'capacityOccupancy',
   components: {
-    Charts
+    Charts,
+    [Slider.name]: Slider
   },
   data() {
     return {
@@ -170,6 +203,7 @@ export default {
         month: "2024-7月",
         amount: 0
       },
+      value: 95,
       option: {
         legend: {
           selectedMode: false
@@ -434,17 +468,17 @@ export default {
     }
   },
   methods: {
-    onSetQuotateStrategy(){
+    onSetQuotateStrategy() {
       let _this = this
-        this.$router.push({
-            path: "/quotate-strategy",
-            query: {
-                data: JSON.stringify({
-                    productionName: _this.data.title,
-                    amount: _this.data.amount
-                })
-            }
-        })
+      this.$router.push({
+        path: "/quotate-strategy",
+        query: {
+          data: JSON.stringify({
+            productionName: _this.data.title,
+            amount: _this.data.amount
+          })
+        }
+      })
     }
   }
 }
