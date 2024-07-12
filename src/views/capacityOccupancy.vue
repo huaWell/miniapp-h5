@@ -9,6 +9,8 @@
   background-color: #f1f5fa !important;
   flex-direction: column;
   overflow: scroll;
+  padding-bottom: 60px;
+  box-sizing: border-box;
 
   .card {
     background-color: #fff;
@@ -141,7 +143,7 @@
       <Charts :options="option2" chartId="chart3" />
     </div>
 
-    <div class="card" style="height: 300px">
+    <div class="card" style="height: 300px;">
       <div class="title">
         <div class="value">
           客户变更统计
