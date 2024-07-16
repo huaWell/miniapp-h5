@@ -27,6 +27,24 @@ export default [
     }
   },
   {
+    path: '/search-order',
+    name: 'SearchOrder',
+    component: () =>
+      import('../views/SearchOrder'),
+    meta: {
+      title: ''
+    }
+  },
+  {
+    path: '/order-progress',
+    name: 'OrderProgress',
+    component: () =>
+      import('../views/OrderProgress'),
+    meta: {
+      title: ''
+    }
+  },
+  {
     path: '/quotate-strategy',
     name: 'QuotateStrategy',
     component: () =>
