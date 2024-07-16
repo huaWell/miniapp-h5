@@ -152,6 +152,34 @@
       <Charts :options="option3" chartId="chart4" />
     </div>
 
+
+    <div class="card" style="height: 300px;">
+      <div class="title">
+        <div class="value">
+          变更原因
+        </div>
+      </div>
+      <Charts :options="option4" chartId="chart5" />
+    </div>
+
+    <div class="card" style="height: 300px;">
+      <div class="title">
+        <div class="value">
+          FCST 销售
+        </div>
+      </div>
+      <Charts :options="option5" chartId="chart6" />
+    </div>
+
+    <div class="card" style="height: 300px;">
+      <div class="title">
+        <div class="value">
+          单位产能利润
+        </div>
+      </div>
+      <Charts :options="option6" chartId="chart7" />
+    </div>
+
     <div class="fixPanel">
       <van-button class="btn btn1">策 略</van-button>
       <van-button class="btn btn2">确 认</van-button>
@@ -456,7 +484,143 @@ export default {
             type: 'line'
           }
         ]
-      }
+      },
+
+      option4: {
+        // graphic: {
+        //   elements: [
+        //     {
+        //       type: 'text',
+        //       right: 'center',
+        //       bottom: 'center',
+        //       style: {
+        //         text: '变更原因\n\n75%',
+        //         textAlign: 'center'
+        //       },
+        //       z: 100
+        //     }
+        //   ]
+        // },
+        series: [
+          {
+            name: 'Access From',
+            type: 'pie',
+            radius: ['45', '60'],
+            label: {
+              show: true,
+              position: 'outside',
+              alignTo: 'labelLine',
+              formatter: '{b}: {d}%'
+            },
+            labelLine: {
+              showAbove: true,
+              length: 5,
+              length2: 40
+            },
+            data: [
+              { value: 30, name: '原因1' },
+              { value: 40, name: '原因2' },
+              { value: 20, name: '原因3' },
+              { value: 10, name: '其他' }
+            ]
+          }
+        ]
+      },
+
+      option5: {
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: [
+            '实际',
+            {
+              name: '预计',
+              itemStyle: {
+                borderType: 'dashed',
+                borderWidth: 1,
+                color: 'transparent',
+                borderColor: '#EA5B3A'
+              }
+            }
+          ]
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            // prettier-ignore
+            data: months
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '实际',
+            type: 'bar',
+            data: [
+              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 0
+            ]
+          },
+          {
+            name: '预测',
+            type: 'bar',
+            data: [
+              2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6
+            ],
+            itemStyle: {
+              color: 'transparent',
+              borderColor: '#165DFF',
+              borderType: 'dashed'
+            },
+          }
+        ]
+      },
+
+      option6: {
+        xAxis: {
+          type: 'category',
+          data: months
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        grid,
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [20, 50, 45, 28, 35, 47, 26],
+            type: 'line',
+            markLine: {
+              symbol: "none",
+              label: {
+                show: true,  // 显示标签
+                position: 'insideEndTop', // 标签显示在终点处
+                formatter: '{b} {c}%' // 使用名称作为标签内容
+              },
+              data: [
+                {
+                  type: 'average',
+                  name: '平均'
+
+                }
+              ]
+            }
+          }
+        ]
+      },
+
+
+
     }
   },
   async mounted() {
