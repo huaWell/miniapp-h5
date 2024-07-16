@@ -120,11 +120,22 @@ export default {
     }
   },
   mounted(){
+    var gotoParam = qs.parse(location.href.split('#')[1].split('?')[1])
+    console.log(gotoParam.isShowProgress)
+    if (gotoParam.isShowProgress) {
+      this.$router.push({
+        path: "/order-progress"
+      })
+      return
+    }
+
     var productionName = this.$route.query.productionName
     console.log(productionName)
     if (productionName) {
         this.productionName = productionName
     }
+
+   
   },
   methods: {
     onShowTime(){
