@@ -125,6 +125,24 @@
       </van-tabs>
     </div>
 
+    <div class="card" style="height: 300px;">
+      <div class="title">
+        <div class="value">
+          FCST 销售
+        </div>
+      </div>
+      <Charts :options="option5" chartId="chart6" />
+    </div>
+
+    <div class="card" style="height: 300px;">
+      <div class="title">
+        <div class="value">
+          单位产能利润
+        </div>
+      </div>
+      <Charts :options="option6" chartId="chart7" />
+    </div>
+
     <div class="card" style="height: 300px">
       <div class="title">
         <div class="value">
@@ -152,7 +170,6 @@
       <Charts :options="option3" chartId="chart4" />
     </div>
 
-
     <div class="card" style="height: 300px;">
       <div class="title">
         <div class="value">
@@ -160,24 +177,6 @@
         </div>
       </div>
       <Charts :options="option4" chartId="chart5" />
-    </div>
-
-    <div class="card" style="height: 300px;">
-      <div class="title">
-        <div class="value">
-          FCST 销售
-        </div>
-      </div>
-      <Charts :options="option5" chartId="chart6" />
-    </div>
-
-    <div class="card" style="height: 300px;">
-      <div class="title">
-        <div class="value">
-          单位产能利润
-        </div>
-      </div>
-      <Charts :options="option6" chartId="chart7" />
     </div>
 
     <div class="fixPanel">
