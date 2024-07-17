@@ -93,6 +93,10 @@
 <script>
 const MAX_COUNT = 1;
 import qs from 'querystring'
+let random = () => {
+  return parseInt(Math.random() * 10000)
+}
+
 export default {
   name: 'Publish',
   computed: {
@@ -160,7 +164,7 @@ export default {
     onGenerator(){
         let _this = this
         this.$router.push({
-            path: "/capacityOccupancy",
+            path: `/capacityOccupancy?v=${random()}`,
             query: {
                 data: JSON.stringify({
                     productionName: _this.productionName,

@@ -88,24 +88,132 @@
   color: #fff;
   pointer-events: none;
 }
+
+.stats{
+      display: flex;
+      background-color: #fff;
+      padding: 16px 8px;
+      box-sizing: border-box;
+      margin-top: 16px;
+      .item{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .text{
+          font-weight: 500;
+          font-size: 22px;
+        }
+        .label{
+          font-size: 16px;
+          color: #bbb;
+        }
+      }
+}
+.model{
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.button-panel{
+  display: flex;
+      background-color: #fff;
+      padding: 16px 8px;
+      box-sizing: border-box;
+      .item{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .text{
+          font-weight: 500;
+          font-size: 32px;
+        }
+        .label{
+          font-size: 16px;
+          color: #000;
+        }
+      }
+}
 </style>
 
 
 <template>
   <div class="container">
-    <div class="card" style="height: 500px">
-      <div>
-        <van-button size="small" round @click="toOrderProgress">进度查询</van-button>
+    <div class="stats">
+      <div class="item">
+          <div class="text">120</div>
+          <div class="label">产能明细</div>
       </div>
+      <div class="item">
+          <div class="text">60</div>
+          <div class="label">单位产能利润</div>
+      </div>
+      <div class="item">
+          <div class="text">50</div>
+          <div class="label">昨日数据</div>
+      </div>
+    </div>
+
+    <div class="model">
+      <!-- <Select label="测试" title-width="70" place="请选择" list="{{testList}}"></Select> -->
+    
+      <van-dropdown-menu active-color="#ACADBB">
+        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption"
+          />
+        <van-dropdown-item v-model="orders" :options="ordersOption" />
+      </van-dropdown-menu>
+
+      <!-- <label for="">策略</label>
+      <select name="策略" id="">
+        <option value="1">策略1</option>
+        <option value="2">策略2</option>
+      </select>
+      <label for="" style="margin-left: 16px;">订单</label>
+      <select name="策略" id="">
+        <option value="1">订单1</option>
+        <option value="2">订单2</option>
+      </select> -->
+    </div>
+
+    <div class="button-panel">
+      <div class="item">
+          <div class="text">
+            <van-icon color="#1989fa" name="clock-o" />
+          </div>
+          <div class="label">一键无延误</div>
+      </div>
+      <div class="item">
+          <div class="text">
+            <van-icon color="#1989fa" name="label-o" />
+          </div>
+          <div class="label">自定义投料</div>
+      </div>
+      <div class="item">
+          <div class="text">
+            <van-icon color="#1989fa" name="refund-o" />
+          </div>
+          <div class="label">定价</div>
+      </div>
+    </div>
+
+    <div class="card" style="height: 500px">
+   
+
+      <!-- <div>
+        <van-button size="small" round @click="toOrderProgress">进度查询</van-button>
+      </div> -->
       <div class="title">
         <div class="value">
           {{ data.title }}
         </div>
         <div class="bar">
-          <div>
+          <div style="font-size: 20px;">
             <van-icon color="#000" name="setting" />
           </div>
-          <div @click="onSetQuotateStrategy">
+          <div style="font-size: 20px;" @click="onSetQuotateStrategy">
             <van-icon color="#1989fa" name="bill" />
           </div>
         </div>
@@ -192,7 +300,7 @@
 <script>
 
 import Charts from '../components/Charts.vue';
-import { Slider } from 'vant';
+import { Slider, DropdownMenu, DropdownItem } from 'vant';
 
 const colorConfig = {
   red: '#d4716e',
@@ -226,15 +334,45 @@ export default {
   name: 'capacityOccupancy',
   components: {
     Charts,
-    [Slider.name]: Slider
+    [Slider.name]: Slider,
+    [DropdownMenu.name]: DropdownMenu,
+    [DropdownItem.name]: DropdownItem,
   },
   data() {
     return {
       data: {
         title: "这是标题",
         month: "2024-7月",
-        amount: 0
+        amount: 0,
+        strategysOption: [
+        { text: '策略', value: 0 },
+        { text: '策略1', value: 1 },
+        { text: '策略2', value: 2 },
+        { text: '策略3', value: 3 },
+      ],
+      ordersOption: [
+        { text: '订单选择', value: 0 },
+        { text: '订单1', value: 1 },
+        { text: '订单2', value: 2 },
+        { text: '订单3', value: 3 }
+      ],
+      strategys: 0,
+      orders: 0,
       },
+      strategysOption: [
+        { text: '策略', value: 0 },
+        { text: '策略1', value: 1 },
+        { text: '策略2', value: 2 },
+        { text: '策略3', value: 3 },
+      ],
+      ordersOption: [
+        { text: '订单选择', value: 0 },
+        { text: '订单1', value: 1 },
+        { text: '订单2', value: 2 },
+        { text: '订单3', value: 3 }
+      ],
+      strategys: 0,
+      orders: 0,
       value: 95,
       option: {
         legend: {
