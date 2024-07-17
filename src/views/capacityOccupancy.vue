@@ -137,11 +137,132 @@
         }
       }
 }
+
+.setting{
+  height: 100vh;
+  position: fixed;
+  width: 70vw;
+  right: 0;
+  top:0;
+  background: #fff;
+  padding: 8px 16px;
+  box-sizing: border-box;
+
+  .title{
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .item{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+    .text{
+      color: #455A6499;
+      font-size: 16px;
+      width: 40%;
+    }
+    .switch{
+      margin-left: 8px;
+    }
+  }
+  .item1{
+    // display: flex;
+    // flex-direction: column;
+    margin-top: 16px;
+    .text{
+      color: #455A6499;
+      font-size: 16px;
+      width: 80%;
+    }
+    .card1{
+      width: 100%;
+      margin-top: 6px;
+    }
+  }
+
+  .footer{
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.popup{
+  padding: 16px;
+  box-sizing: border-box;
+  .title{
+
+  }
+  .content{
+    
+  }
+}
+.popupRes{
+  padding: 16px;
+  box-sizing: border-box;
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .text{
+      color: #323233;
+      font-size: 16px;
+    }
+    .date{
+      color: #666;
+    }
+  }
+  .content{
+    margin-top: 16px;
+      .item{
+        font-size: 14px;
+        .label{
+          color: #666;
+         
+        }
+        .text{
+          margin-left: 4px;
+        }
+      }
+  }
+}
+
+
+.popupTL{
+  padding: 16px;
+  box-sizing: border-box;
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #323233;
+      font-size: 16px;
+  }
+  .content{
+    margin-top: 16px;
+
+  }
+}
+
+.my-popup{
+  padding: 20px;
+  box-sizing: border-box
+}
+.list-item{
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box
+}
+
 </style>
 
 
 <template>
-  <div class="container">
+  <div class="container" >   
     <div class="stats">
       <div class="item">
           <div class="text">120</div>
@@ -165,17 +286,6 @@
           />
         <van-dropdown-item v-model="orders" :options="ordersOption" />
       </van-dropdown-menu>
-
-      <!-- <label for="">策略</label>
-      <select name="策略" id="">
-        <option value="1">策略1</option>
-        <option value="2">策略2</option>
-      </select>
-      <label for="" style="margin-left: 16px;">订单</label>
-      <select name="策略" id="">
-        <option value="1">订单1</option>
-        <option value="2">订单2</option>
-      </select> -->
     </div>
 
     <div class="button-panel">
@@ -185,7 +295,7 @@
           </div>
           <div class="label">一键无延误</div>
       </div>
-      <div class="item">
+      <div class="item" @click="onShowTL">
           <div class="text">
             <van-icon color="#1989fa" name="label-o" />
           </div>
@@ -200,8 +310,6 @@
     </div>
 
     <div class="card" style="height: 500px">
-   
-
       <!-- <div>
         <van-button size="small" round @click="toOrderProgress">进度查询</van-button>
       </div> -->
@@ -211,13 +319,18 @@
         </div>
         <div class="bar">
           <div style="font-size: 20px;">
-            <van-icon color="#000" name="setting" />
+            <van-icon color="#000" name="setting" @click="onClickSetting" />
           </div>
           <div style="font-size: 20px;" @click="onSetQuotateStrategy">
             <van-icon color="#1989fa" name="bill" />
           </div>
         </div>
       </div>
+      
+      <div style="position: relative;">
+        <div @click="qujiantongji" style="position: absolute;right: 0;font-size: 12px;color: #aaa;">区间统计</div>
+      </div>
+
       <div>预计完成时间: {{ data.month }}</div>
       <div style="position: relative;">
         <van-slider v-model="value" bar-height="10px">
@@ -228,6 +341,8 @@
         <div class="slider-text" style="left: 33%;">| 33%</div>
         <div class="slider-text" style="left: 66%;">| 66%</div>
       </div>
+
+
       <Charts :options="option" chartId="chart1" />
       <van-tabs type="card">
         <van-tab title="周"></van-tab>
@@ -291,16 +406,201 @@
     </div>
 
     <div class="fixPanel">
-      <van-button class="btn btn1">策 略</van-button>
+      <van-button class="btn btn1" @click="onShowStrategy">策 略</van-button>
       <van-button class="btn btn2">确 认</van-button>
     </div>
+
+    <van-overlay @click="onClickHideSetting" :show="showSetting">
+        <div class="setting">
+          <div class="title">设置</div>
+          <div class="item">
+             <div class="text">总产能</div>
+             <div class="switch">
+                <van-switch size="20" v-model="check1" />
+             </div>
+          </div>
+          <div class="item">
+             <div class="text">产能上限</div>
+             <div class="switch">
+                <van-switch size="20" v-model="check2" />
+             </div>
+          </div>
+          <div class="item">
+             <div class="text">配额上限</div>
+             <div class="switch">
+                <van-switch size="20" v-model="check3" />
+             </div>
+          </div>
+          <div class="item">
+             <div class="text">显示缺口</div>
+             <div class="switch">
+                <van-switch size="20" v-model="check4" />
+             </div>
+          </div>
+          <div class="item1">
+            <div class="text">副图指标数量</div>
+            <div class="card1">
+              <van-tabs type="card">
+                <van-tab title="1"></van-tab>
+                <van-tab title="2"></van-tab>
+                <van-tab title="3"></van-tab>
+                <van-tab title="4"></van-tab>
+                <van-tab title="5"></van-tab>
+                <van-tab title="6"></van-tab>
+               </van-tabs>
+            </div>
+            
+          </div> 
+
+          <div class="footer">
+            <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
+            <van-button size="small" type="primary" @click="confirmSetting"> 确 定 </van-button>
+          </div>
+        </div>
+      </van-overlay>
+
+      <van-overlay @click="onClickHideStrategy" :show="showStrategy">
+        <div class="setting">
+          <div class="title">策略</div>
+          <div style="margin-top: 16px;">
+            <van-cell-group>
+            <van-field
+              v-model="gongshi"
+              clearable
+              label="工时"
+              icon="question-o"
+              placeholder="请输入工时"
+            />
+
+            <custom-select 
+                label="班次" 
+                v-model="bancis" 
+                :columns="bancisColumns"
+                :option="{label: 'label', value: 'value'}"  
+                :isShowAll="false"
+                placeholder="选择班次"
+            />
+
+           <van-cell title="配额" is-link @click="onShowPE" v-model="peie" />
+           <van-field
+              v-model="customPeie"
+              clearable
+              label="自定义"
+              icon="question-o"
+              placeholder="请输入班次"
+            />
+            <custom-select 
+                label="优先级" 
+                v-model="youxianji" 
+                :columns="youxianjiColumns"
+                :option="{label: 'label', value: 'value'}"  
+                :isShowAll="false"
+                placeholder="选择优先级"
+            />
+          </van-cell-group>
+
+          </div>
+          
+          <div class="footer">
+            <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
+            <van-button size="small" type="primary" @click="confirmStrategy"> 确 定 </van-button>
+          </div>
+        </div>
+      </van-overlay>
+
+      <van-action-sheet v-model="showQJ">
+        <div class="popup" style="height: 80vh;">
+          <div class="title">区间统计</div>
+          <div class="qj">
+            <van-cell is-link title="选择多个日期" v-model="dateText" @click="onShowDatePicker" />
+            <van-calendar
+              v-model="showDatePicker"
+              type="range"
+              @close="onCloseDatePicker"
+              @confirm="onConfirmDatePicker"
+            />
+          </div>
+          <van-button class="my-van-button" round size="middle" type="primary" @click="onCalQJ"> 确 定 </van-button>
+        </div>
+      </van-action-sheet>
+
+      <van-action-sheet v-model="showQJRes">
+        <div class="popupRes">
+          <div class="title">
+            <div class="text">区间统计</div>
+            <div class="date">{{dateText}}</div>
+          </div>
+          <div class="content">
+            <div class="item">
+              <span class="label">产能占比:</span>
+              <span class="text">20%</span>
+            </div>
+            <div class="item">
+              <span class="label">生产数量:</span>
+              <span class="text">8888</span>
+            </div>
+            <div class="item">
+              <span class="label">单位利润:</span>
+              <span class="text">6666</span>
+            </div>
+          </div>
+        </div>
+      </van-action-sheet>
+
+      <van-action-sheet v-model="showTL">
+        <div class="popupTL">
+          <div class="title">
+            当前投料顺序
+          </div>
+          <div class="content">
+            <div class="my-list">
+              <div class="list-item" v-for="(item,index) in lists" :key="index">
+                {{item.text}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </van-action-sheet>
+
+      <van-popup v-model="showPE" position="bottom">
+        <div class="my-popup">
+            <div class="title">设置配额</div> 
+            <div class="content">
+              <van-field
+                v-model="peie1"
+                clearable
+                label="客户A"
+                icon="question-o"
+                placeholder="请输入配额"
+              />
+            <van-field
+              v-model="peie2"
+              clearable
+              label="客户B"
+              icon="question-o"
+              placeholder="请输入配额"
+            />
+            <van-field
+              v-model="peie3"
+              clearable
+              label="客户C"
+              icon="question-o"
+              placeholder="请输入配额"
+            />
+            </div>
+          </div>
+          <van-button class="my-van-button" round size="middle" type="primary" @click="onCalPE"> 确 定 </van-button>
+      </van-popup>
+
   </div>
 </template>
 
 <script>
 
 import Charts from '../components/Charts.vue';
-import { Slider, DropdownMenu, DropdownItem } from 'vant';
+import { Slider, DropdownMenu, DropdownItem, Overlay, Switch, Calendar, Popup } from 'vant';
+import CustomSelect from '../components/CustomSelect.vue'
+import Sortable from 'sortablejs'
 
 const colorConfig = {
   red: '#d4716e',
@@ -334,9 +634,14 @@ export default {
   name: 'capacityOccupancy',
   components: {
     Charts,
+    CustomSelect,
     [Slider.name]: Slider,
     [DropdownMenu.name]: DropdownMenu,
     [DropdownItem.name]: DropdownItem,
+    [Overlay.name]: Overlay,
+    [Switch.name]: Switch,
+    [Calendar.name]: Calendar,
+    [Popup.name]: Popup
   },
   data() {
     return {
@@ -759,8 +1064,54 @@ export default {
         ]
       },
 
-
-
+      showSetting: false,
+      check1: false,
+      check2: false,
+      check3: false,
+      check4: false,
+      showQJ: false,
+      dateText:'',
+      showDatePicker: false,
+      showQJRes: false,
+      showStrategy: false,
+      gongshi:'',
+      banci_s:'',
+      banci_e:'',
+      peie:'',
+      customPeie:'',
+      youxianji:'',
+      youxianjiColumns:[
+        {label: "客户优先", value: '1'},
+        {label: "订单优先", value: '2'},
+        {label: "金额优先", value: '3'}
+      ],
+      bancis: '',
+      bancisColumns:[
+        {label: "8", value: '1'},
+        {label: "8+8", value: '2'},
+        {label: "8+8+8", value: '3'}
+      ],
+      bancie: '',
+      bancieColumns:[
+        {label: "8", value: '1'},
+        {label: "8+8", value: '2'},
+        {label: "8+8+8", value: '3'}
+      ],
+      showPE: false,
+      peie1: '',
+      peie2: '',
+      peie3: '',
+      lists: [
+        {id:1,text:'订单A'},
+        {id:2,text:'订单B'},
+        {id:3,text:'订单C'},
+        {id:4,text:'订单D'},
+        {id:5,text:'订单E'},
+        {id:6,text:'订单F'}
+      ],
+      sortable: null,
+      showTL: false,
+      isFirstShowTL: true
     }
   },
   async mounted() {
@@ -773,7 +1124,20 @@ export default {
       this.data.amount = data.amount
     }
   },
+  beforeDestroy(){
+    if (this.sortable) {
+      this.sortable.destroy()
+    }
+  },
   methods: {
+    onEnd(evt){
+      console.log(evt)
+      const {oldIndex, newIndex} = evt;
+      // 更新数据  
+      // const movedItem = this.lists.splice(oldIndex, 1)[0];  
+      // this.lists.splice(newIndex, 0, movedItem); 
+      // this.$forceUpdate()
+    },
     toOrderProgress(){
       this.$router.push({
         path: "/orderProgress"
@@ -790,6 +1154,67 @@ export default {
           })
         }
       })
+    },
+    qujiantongji(){
+      // 区间统计
+      this.showQJ = true
+    },
+    onClickSetting(){
+      this.showSetting = true
+    },
+    onClickHideSetting(){
+      //this.showSetting = false
+    },
+    confirmSetting(){
+      this.showSetting = false
+    },
+    formatDate(date){
+      date = new Date(date);
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1;
+      var day = date.getDate()
+      return year + "/" + month + '/' + day
+    },
+    onShowDatePicker(){
+      this.showDatePicker = true
+    },
+    onCloseDatePicker(){
+      this.showDatePicker = false
+    },
+    onConfirmDatePicker(e){
+      this.showDatePicker = false
+      var s = this.formatDate(e[0])
+      var e = this.formatDate(e[1])
+      this.dateText = s + '-' + e
+    },
+    onCalQJ(){
+      this.showQJRes = true;
+    },
+    onClickHideStrategy(){
+
+    },
+    onShowStrategy(){
+      this.showStrategy = true;
+    },
+    confirmStrategy(){
+      this.showStrategy = false;
+    },
+    onShowPE(){
+      this.showPE = true;
+    },
+    onCalPE(){
+      this.showPE = false;
+    },
+    onShowTL(){
+      this.showTL = true;
+      if (this.isFirstShowTL) {
+        setTimeout(()=>{
+          this.sortable = new Sortable(this.$el.querySelector(".my-list"),{
+          onEnd: this.onEnd
+          })
+        },100)        
+        this.isFirstShowTL = false
+      }
     }
   }
 }

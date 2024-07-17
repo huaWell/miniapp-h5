@@ -1,5 +1,21 @@
+<style lang="less" scoped>
+.t_select {
+  padding: 0 16px;
+  background: #fff;
+  .t-cell.van-cell {
+    padding: 10px 0;
+  }
+  .t-cell.van-cell--required::before {
+    left: -8px;
+  }
+  .van-popup {
+    border-radius: 20px 20px 0 0;
+  }
+}
+</style>
+
 <template>
-    <div class="t_select">
+  <div class="t_select">
       <div class="van-hairline--bottom">
         <van-field
           v-model="resultLabel"
@@ -8,7 +24,7 @@
           :is-link="$attrs.disabled === undefined"
           error-message-align="right"
           input-align="right"
-          @click="showPopu($attrs.disabled)"
+          @focus="showPopu($attrs.disabled)"
           class="t-cell"
         />
         <van-popup v-model="show" position="bottom">
@@ -63,16 +79,20 @@
         </van-popup>
       </div>
     </div>
-  </template>
+</template>
   
   <script>
+  import { Popup } from 'vant'
   export default {
-    name: 'TMultipleSelect',
-    model: {
-      prop: 'selectValue'
+    name: 'CustomSelect',
+    // model: {
+    //   prop: 'selectValue'
+    // },
+    components: {
+        [Popup.name]: Popup
     },
     props: {
-      columns: {
+        columns: {
         type: Array,
         default: function () {
           return []
@@ -230,20 +250,5 @@
   }
   </script>
   
-  <style lang="scss" scoped>
-  .t_select {
-    padding: 0 16px;
-    background: #fff;
-    .t-cell.van-cell {
-      padding: 10px 0;
-    }
-    .t-cell.van-cell--required::before {
-      left: -8px;
-    }
-    .van-popup {
-      border-radius: 20px 20px 0 0;
-    }
-  }
-  </style>
   
   
