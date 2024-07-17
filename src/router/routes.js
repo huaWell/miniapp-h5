@@ -36,7 +36,7 @@ export default [
     }
   },
   {
-    path: '/order-progress',
+    path: '/orderProgress',
     name: 'OrderProgress',
     component: () =>
       import('../views/OrderProgress'),

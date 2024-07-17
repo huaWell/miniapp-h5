@@ -204,7 +204,7 @@
       width: 100vw;
       position: fixed;
       bottom: 0;
-      height: 40px;
+      height: 60px;
       background-color: #fff;
       display: flex;
       align-items: center;

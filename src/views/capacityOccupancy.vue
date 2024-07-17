@@ -94,6 +94,9 @@
 <template>
   <div class="container">
     <div class="card" style="height: 500px">
+      <div>
+        <van-button size="small" round @click="toOrderProgress">进度查询</van-button>
+      </div>
       <div class="title">
         <div class="value">
           {{ data.title }}
@@ -633,6 +636,11 @@ export default {
     }
   },
   methods: {
+    toOrderProgress(){
+      this.$router.push({
+        path: "/orderProgress"
+      })
+    },
     onSetQuotateStrategy() {
       let _this = this
       this.$router.push({
