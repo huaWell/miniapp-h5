@@ -275,5 +275,14 @@ export default [
     meta: {
       title: ''
     }
+  },
+  {
+    path: '/homepage',
+    name: 'homepage',
+    component: () =>
+      import('../views/home1'),
+    meta: {
+      title: ''
+    }
   }
 ]
