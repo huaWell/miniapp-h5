@@ -18,6 +18,15 @@ export default [
     }
   },
   {
+    path: '/order-stats',
+    name: 'OrderStats',
+    component: () =>
+      import('../views/OrderStats'),
+    meta: {
+      title: ''
+    }
+  },
+  {
     path: '/search-production',
     name: 'SearchProduction',
     component: () =>

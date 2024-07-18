@@ -132,7 +132,7 @@
           font-size: 32px;
         }
         .label{
-          font-size: 16px;
+          font-size: 14px;
           color: #000;
         }
       }
@@ -306,6 +306,12 @@
             <van-icon color="#1989fa" name="refund-o" />
           </div>
           <div class="label">定价</div>
+      </div>
+      <div class="item" @click="addNewOrder">
+          <div class="text">
+            <van-icon color="#1989fa" name="add-o" />
+          </div>
+          <div class="label">新建订单</div>
       </div>
     </div>
 
@@ -611,9 +617,9 @@ const colorConfig = {
 let months = ["2月", "3月", "4月", "5月", "6月", "7月", "8月"];
 
 const rawData = [
-  [10, 30, 30, 33, 39, 33, 32],
-  [32, 13, 10, 13, 9, 23, null],
-  [10, 20, 10, 5, 20, 10, 40],
+  [20, 25, 19, 13, 8, 6, 3],
+  [38, 29, 26, 22, 18, 25, 17],
+  [18, 30, 29, 25, 39, 19, 30],
 ];
 const totalData = [];
 for (let i = 0; i < rawData[0].length; ++i) {
@@ -1215,6 +1221,11 @@ export default {
         },100)        
         this.isFirstShowTL = false
       }
+    },
+    addNewOrder(){
+      this.$router.push({
+        path: "/publish-order"
+      })
     }
   }
 }
