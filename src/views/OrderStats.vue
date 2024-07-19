@@ -7,7 +7,7 @@
   background-color: #f1f5fa !important;
   flex-direction: column;
   overflow: scroll;
-  padding-bottom: 60px;
+  padding-bottom: 100px;
   box-sizing: border-box;
 }
 .card {
@@ -80,7 +80,7 @@
       </div>
       <Charts :options="option3" chartId="chart3" />
     </div>
-    <div>
+    <div style="position: fixed;bottom: 20px;width: 100vw;">
         <van-button class="my-van-button" round size="middle" type="primary" @click="toOrderList"> 订单列表 </van-button>
     </div>
 
