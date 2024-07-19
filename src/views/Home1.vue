@@ -30,7 +30,19 @@
       flex-basis: auto;
 
       .value {
+        display: flex;
+        gap: 8px;
+        align-items: center;
         color: rgb(51, 51, 51);
+        font-size: 18px;
+
+        .mark {
+          width: 6px;
+          height: 18px;
+          background: #3775F6;
+          border-radius: 4px;
+          font-weight: 500px;
+        }
       }
 
       .bar {
@@ -99,7 +111,11 @@
   box-sizing: border-box;
   gap: 8px;
 
-  .img {}
+  .img {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
 
   .content {
     flex: 1;
@@ -111,8 +127,6 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   background-color: #fff;
-  padding: 12px;
-  box-sizing: border-box;
 
   .item {
     background-color: #f1f5fa;
@@ -149,26 +163,52 @@
   <div class="container">
     <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o"
       text="订单xx, 需要紧急处理！详细描述：xxx员工对xx设备做出了错误操作,请尽快处理。" />
-    <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
-      <div class="item" style="height: 70px;background-color: transparent;" v-for="(item, index) in items" @click="item.click">
-        <div class="img-box" v-if="item.text != '...'">
-          <img class="img-box-img"
-            src="https://img2.baidu.com/it/u=1421951440,2958002268&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=390"></img>
+
+    <div class="card">
+      <div class="title">
+        <div class="value">
+          <div class="mark"></div>
+          快捷入口
         </div>
-        <div class="text">{{ item.text }}</div>
+      </div>
+      <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="item" style="height: 70px;background-color: transparent;" v-for="(item, index) in items"
+          @click="item.click">
+          <div class="img-box" v-if="item.text != '...'">
+            <img class="img-box-img"
+              src="https://img2.baidu.com/it/u=1421951440,2958002268&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=390"></img>
+          </div>
+          <div class="text">{{ item.text }}</div>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="todo" v-for="(todo, index) in todos">
-        <van-icon :name="todo.icon" />
+      <div class="title">
+        <div class="value">
+          <div class="mark"></div>
+          最近代办
+        </div>
+      </div>
+      <div class="todo" v-for="(todo, index) in  todos ">
+        <div v-if="todo.color ? true : false" class="img" :style="{ backgroundColor: todo.color }"></div>
+        <van-icon v-if="todo.icon ? true : false" :name="todo.icon" />
         <div class="content">{{ todo.text }}</div>
       </div>
     </div>
-    <div class="grid">
-      <div class="item" v-for="(card, index) in cards">
-        <div class="title">{{ card.title }}</div>
-        <div class="value">{{ card.value }}</div>
+
+    <div class="card">
+      <div class="title">
+        <div class="value">
+          <div class="mark"></div>
+          核心指标
+        </div>
+      </div>
+      <div class="grid">
+        <div class="item" v-for="( card, index ) in  cards ">
+          <div class="title">{{ card.title }}</div>
+          <div class="value">{{ card.value }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -176,6 +216,13 @@
 
 <script>
 import { NoticeBar } from 'vant';
+
+const colorConfig = {
+  red: "#bc4749",
+  yellow: "#f6bd60",
+  green: "#6a994e"
+};
+
 export default {
   name: 'home',
   components: {
@@ -202,30 +249,30 @@ export default {
         },
         {
           text: "供应态势",
-          click() {}
+          click() { }
         },
         {
           text: "...",
-          click() {}
+          click() { }
         }
       ],
 
       todos: [
         {
-          icon: "warning-o",
-          text: "待办事件1 (审核)"
+          color: colorConfig.red,
+          text: "客户X - 订单XXX 延误N天"
         },
         {
-          icon: "warning-o",
-          text: "待办事件2"
+          color: colorConfig.yellow,
+          text: "销售员A对您发起销售配额上限审批"
         },
         {
-          icon: "warning-o",
-          text: "待办事件3"
+          color: colorConfig.green,
+          text: "针对某事件 需要您执行方案决策"
         },
         {
-          icon: "warn-o",
-          text: "待办事件4"
+          icon: "shop-o",
+          text: "更多"
         }
       ],
 
@@ -235,7 +282,7 @@ export default {
           value: "25"
         },
         {
-          title: "待售产能",
+          title: "本月待售产能",
           value: "10%"
         },
         {
