@@ -89,100 +89,112 @@
   pointer-events: none;
 }
 
-.stats{
-      display: flex;
-      background-color: #fff;
-      padding: 16px 8px;
-      box-sizing: border-box;
-      margin-top: 16px;
-      .item{
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        .text{
-          font-weight: 500;
-          font-size: 22px;
-        }
-        .label{
-          font-size: 16px;
-          color: #bbb;
-        }
-      }
+.stats {
+  display: flex;
+  background-color: #fff;
+  padding: 16px 8px;
+  box-sizing: border-box;
+  margin-top: 16px;
+
+  .item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .text {
+      font-weight: 500;
+      font-size: 22px;
+    }
+
+    .label {
+      font-size: 16px;
+      color: #bbb;
+    }
+  }
 }
-.model{
+
+.model {
   background-color: #fff;
   box-sizing: border-box;
 }
 
-.button-panel{
+.button-panel {
   display: flex;
-      background-color: #fff;
-      padding: 16px 8px;
-      box-sizing: border-box;
-      .item{
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        .text{
-          font-weight: 500;
-          font-size: 32px;
-        }
-        .label{
-          font-size: 14px;
-          color: #000;
-        }
-      }
+  background-color: #fff;
+  padding: 16px 8px;
+  box-sizing: border-box;
+
+  .item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .text {
+      font-weight: 500;
+      font-size: 32px;
+    }
+
+    .label {
+      font-size: 14px;
+      color: #000;
+    }
+  }
 }
 
-.setting{
+.setting {
   height: 100vh;
   position: fixed;
   width: 70vw;
   right: 0;
-  top:0;
+  top: 0;
   background: #fff;
   padding: 8px 16px;
   box-sizing: border-box;
 
-  .title{
+  .title {
     font-size: 28px;
     font-weight: 500;
   }
 
-  .item{
+  .item {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-top: 16px;
-    .text{
+
+    .text {
       color: #455A6499;
       font-size: 16px;
       width: 40%;
     }
-    .switch{
+
+    .switch {
       margin-left: 8px;
     }
   }
-  .item1{
+
+  .item1 {
     // display: flex;
     // flex-direction: column;
     margin-top: 16px;
-    .text{
+
+    .text {
       color: #455A6499;
       font-size: 16px;
       width: 80%;
     }
-    .card1{
+
+    .card1 {
       width: 100%;
       margin-top: 6px;
     }
   }
 
-  .footer{
+  .footer {
     position: fixed;
     bottom: 24px;
     right: 24px;
@@ -191,127 +203,136 @@
   }
 }
 
-.popup{
+.popup {
   padding: 16px;
   box-sizing: border-box;
-  .title{
 
-  }
-  .content{
-    
-  }
+  .title {}
+
+  .content {}
 }
-.popupRes{
+
+.popupRes {
   padding: 16px;
   box-sizing: border-box;
-  .title{
+
+  .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .text{
+
+    .text {
       color: #323233;
       font-size: 16px;
     }
-    .date{
+
+    .date {
       color: #666;
     }
   }
-  .content{
+
+  .content {
     margin-top: 16px;
-      .item{
-        font-size: 14px;
-        .label{
-          color: #666;
-         
-        }
-        .text{
-          margin-left: 4px;
-        }
+
+    .item {
+      font-size: 14px;
+
+      .label {
+        color: #666;
+
       }
+
+      .text {
+        margin-left: 4px;
+      }
+    }
   }
 }
 
 
-.popupTL{
+.popupTL {
   padding: 16px;
   box-sizing: border-box;
-  .title{
+
+  .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: #323233;
-      font-size: 16px;
+    font-size: 16px;
   }
-  .content{
+
+  .content {
     margin-top: 16px;
 
   }
 }
 
-.my-popup{
+.my-popup {
   padding: 20px;
   box-sizing: border-box
 }
-.list-item{
+
+.list-item {
   padding: 10px;
   border-bottom: 1px solid #eee;
   box-sizing: border-box
 }
-
 </style>
 
 
 <template>
-  <div class="container" >   
+  <div class="container">
     <div class="stats">
       <div class="item">
-          <div class="text">120</div>
-          <div class="label">产能明细</div>
+        <div class="text">120</div>
+        <div class="label">产能明细</div>
       </div>
       <div class="item">
-          <div class="text">60</div>
-          <div class="label">单位产能利润</div>
+        <div class="text">60</div>
+        <div class="label">单位产能利润</div>
       </div>
       <div class="item">
-          <div class="text">50</div>
-          <div class="label">昨日数据</div>
+        <div class="text">50</div>
+        <div class="label">昨日数据</div>
       </div>
     </div>
 
     <div class="model">
       <!-- <Select label="测试" title-width="70" place="请选择" list="{{testList}}"></Select> -->
-    
+
       <van-dropdown-menu active-color="#ACADBB">
-        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption"
-          />
-        <van-dropdown-item v-model="orders" :options="ordersOption" />
+        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption" />
+        <van-dropdown-item title="订单选择" ref="itemRef">
+          <SearchProduction @item-click="onOrderChange" />
+        </van-dropdown-item>
       </van-dropdown-menu>
     </div>
 
     <div class="button-panel">
       <div class="item">
-          <div class="text">
-            <van-icon color="#1989fa" name="clock-o" />
-          </div>
-          <div class="label">一键无延误</div>
+        <div class="text">
+          <van-icon color="#1989fa" name="clock-o" />
+        </div>
+        <div class="label">一键无延误</div>
       </div>
       <div class="item" @click="onShowTL">
-          <div class="text">
-            <van-icon color="#1989fa" name="label-o" />
-          </div>
-          <div class="label">自定义投料</div>
+        <div class="text">
+          <van-icon color="#1989fa" name="label-o" />
+        </div>
+        <div class="label">自定义投料</div>
       </div>
-      <div class="item">
-          <div class="text">
-            <van-icon color="#1989fa" name="refund-o" />
-          </div>
-          <div class="label">定价</div>
+      <div class="item" @click="onSetQuotateStrategy" >
+        <div class="text">
+          <van-icon color="#1989fa" name="refund-o" />
+        </div>
+        <div class="label">定价</div>
       </div>
       <div class="item" @click="addNewOrder">
-          <div class="text">
-            <van-icon color="#1989fa" name="add-o" />
-          </div>
-          <div class="label">新建订单</div>
+        <div class="text">
+          <van-icon color="#1989fa" name="add-o" />
+        </div>
+        <div class="label">新建订单</div>
       </div>
     </div>
 
@@ -324,18 +345,27 @@
           {{ data.title }}
         </div>
         <div class="bar">
-          <div style="font-size: 20px;">
-            <van-icon color="#000" name="setting" @click="onClickSetting" />
-          </div>
-          <div style="font-size: 20px;" @click="onSetQuotateStrategy">
-            <van-icon color="#1989fa" name="bill" />
-          </div>
+          <van-popover v-model="showPopover" trigger="click" placement="left">
+            <div style="display: flex; gap: 8px;padding: 8px;">
+              <div style="font-size: 20px;">
+                <van-button icon="setting" size="small" @click="onClickSetting" />
+                <!-- <van-icon color="#000" name="setting" @click="onClickSetting" /> -->
+              </div>
+              <div style="font-size: 20px;">
+                <van-button icon="bill" size="small" @click="qujiantongji" />
+                <!-- <van-icon color="#1989fa" name="bill" /> -->
+              </div>
+            </div>
+            <template #reference>
+              <van-button size="small">...</van-button>
+            </template>
+          </van-popover>
         </div>
       </div>
-      
-      <div style="position: relative;">
+
+      <!-- <div style="position: relative;">
         <div @click="qujiantongji" style="position: absolute;right: 0;font-size: 12px;color: #aaa;">区间统计</div>
-      </div>
+      </div> -->
 
       <div>预计完成时间: {{ data.month }}</div>
       <div style="position: relative;">
@@ -417,186 +447,140 @@
     </div>
 
     <van-overlay @click="onClickHideSetting" :show="showSetting">
-        <div class="setting">
-          <div class="title">设置</div>
-          <div class="item">
-             <div class="text">总产能</div>
-             <div class="switch">
-                <van-switch size="20" v-model="check1" />
-             </div>
-          </div>
-          <div class="item">
-             <div class="text">产能上限</div>
-             <div class="switch">
-                <van-switch size="20" v-model="check2" />
-             </div>
-          </div>
-          <div class="item">
-             <div class="text">配额上限</div>
-             <div class="switch">
-                <van-switch size="20" v-model="check3" />
-             </div>
-          </div>
-          <div class="item">
-             <div class="text">显示缺口</div>
-             <div class="switch">
-                <van-switch size="20" v-model="check4" />
-             </div>
-          </div>
-          <div class="item1">
-            <div class="text">副图指标数量</div>
-            <div class="card1">
-              <van-tabs type="card">
-                <van-tab title="1"></van-tab>
-                <van-tab title="2"></van-tab>
-                <van-tab title="3"></van-tab>
-                <van-tab title="4"></van-tab>
-                <van-tab title="5"></van-tab>
-                <van-tab title="6"></van-tab>
-               </van-tabs>
-            </div>
-            
-          </div> 
-
-          <div class="footer">
-            <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
-            <van-button size="small" type="primary" @click="confirmSetting"> 确 定 </van-button>
+      <div class="setting">
+        <div class="title">设置</div>
+        <div class="item">
+          <div class="text">总产能</div>
+          <div class="switch">
+            <van-switch size="20" v-model="check1" />
           </div>
         </div>
-      </van-overlay>
+        <div class="item">
+          <div class="text">产能上限</div>
+          <div class="switch">
+            <van-switch size="20" v-model="check2" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="text">配额上限</div>
+          <div class="switch">
+            <van-switch size="20" v-model="check3" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="text">显示缺口</div>
+          <div class="switch">
+            <van-switch size="20" v-model="check4" />
+          </div>
+        </div>
+        <div class="item1">
+          <div class="text">副图指标数量</div>
+          <div class="card1">
+            <van-tabs type="card">
+              <van-tab title="1"></van-tab>
+              <van-tab title="2"></van-tab>
+              <van-tab title="3"></van-tab>
+              <van-tab title="4"></van-tab>
+              <van-tab title="5"></van-tab>
+              <van-tab title="6"></van-tab>
+            </van-tabs>
+          </div>
 
-      <van-overlay @click="onClickHideStrategy" :show="showStrategy">
-        <div class="setting">
-          <div class="title">策略</div>
-          <div style="margin-top: 16px;">
-            <van-cell-group>
-            <van-field
-              v-model="gongshi"
-              clearable
-              label="工时"
-              icon="question-o"
-              placeholder="请输入工时"
-            />
+        </div>
 
-            <custom-select 
-                label="班次" 
-                v-model="bancis" 
-                :columns="bancisColumns"
-                :option="{label: 'label', value: 'value'}"  
-                :isShowAll="false"
-                placeholder="选择班次"
-            />
+        <div class="footer">
+          <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
+          <van-button size="small" type="primary" @click="confirmSetting"> 确 定 </van-button>
+        </div>
+      </div>
+    </van-overlay>
 
-           <van-cell title="配额" is-link @click="onShowPE" v-model="peie" />
-           <van-field
-              v-model="customPeie"
-              clearable
-              label="自定义"
-              icon="question-o"
-              placeholder="请输入班次"
-            />
-            <custom-select 
-                label="优先级" 
-                v-model="youxianji" 
-                :columns="youxianjiColumns"
-                :option="{label: 'label', value: 'value'}"  
-                :isShowAll="false"
-                placeholder="选择优先级"
-            />
+    <van-overlay @click="onClickHideStrategy" :show="showStrategy">
+      <div class="setting">
+        <div class="title">策略</div>
+        <div style="margin-top: 16px;">
+          <van-cell-group>
+            <van-field v-model="gongshi" clearable label="工时" icon="question-o" placeholder="请输入工时" />
+
+            <custom-select label="班次" v-model="bancis" :columns="bancisColumns"
+              :option="{ label: 'label', value: 'value' }" :isShowAll="false" placeholder="选择班次" />
+
+            <van-cell title="配额" is-link @click="onShowPE" v-model="peie" />
+            <van-field v-model="customPeie" clearable label="自定义" icon="question-o" placeholder="请输入班次" />
+            <custom-select label="优先级" v-model="youxianji" :columns="youxianjiColumns"
+              :option="{ label: 'label', value: 'value' }" :isShowAll="false" placeholder="选择优先级" />
           </van-cell-group>
 
+        </div>
+
+        <div class="footer">
+          <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
+          <van-button size="small" type="primary" @click="confirmStrategy"> 确 定 </van-button>
+        </div>
+      </div>
+    </van-overlay>
+
+    <van-action-sheet v-model="showQJ">
+      <div class="popup" style="height: 80vh;">
+        <div class="title">区间统计</div>
+        <div class="qj">
+          <van-cell is-link title="选择多个日期" v-model="dateText" @click="onShowDatePicker" />
+          <van-calendar v-model="showDatePicker" type="range" @close="onCloseDatePicker"
+            @confirm="onConfirmDatePicker" />
+        </div>
+        <van-button class="my-van-button" round size="middle" type="primary" @click="onCalQJ"> 确 定 </van-button>
+      </div>
+    </van-action-sheet>
+
+    <van-action-sheet v-model="showQJRes">
+      <div class="popupRes">
+        <div class="title">
+          <div class="text">区间统计</div>
+          <div class="date">{{ dateText }}</div>
+        </div>
+        <div class="content">
+          <div class="item">
+            <span class="label">产能占比:</span>
+            <span class="text">20%</span>
           </div>
-          
-          <div class="footer">
-            <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
-            <van-button size="small" type="primary" @click="confirmStrategy"> 确 定 </van-button>
+          <div class="item">
+            <span class="label">生产数量:</span>
+            <span class="text">8888</span>
+          </div>
+          <div class="item">
+            <span class="label">单位利润:</span>
+            <span class="text">6666</span>
           </div>
         </div>
-      </van-overlay>
+      </div>
+    </van-action-sheet>
 
-      <van-action-sheet v-model="showQJ">
-        <div class="popup" style="height: 80vh;">
-          <div class="title">区间统计</div>
-          <div class="qj">
-            <van-cell is-link title="选择多个日期" v-model="dateText" @click="onShowDatePicker" />
-            <van-calendar
-              v-model="showDatePicker"
-              type="range"
-              @close="onCloseDatePicker"
-              @confirm="onConfirmDatePicker"
-            />
-          </div>
-          <van-button class="my-van-button" round size="middle" type="primary" @click="onCalQJ"> 确 定 </van-button>
+    <van-action-sheet v-model="showTL">
+      <div class="popupTL">
+        <div class="title">
+          当前投料顺序
         </div>
-      </van-action-sheet>
-
-      <van-action-sheet v-model="showQJRes">
-        <div class="popupRes">
-          <div class="title">
-            <div class="text">区间统计</div>
-            <div class="date">{{dateText}}</div>
-          </div>
-          <div class="content">
-            <div class="item">
-              <span class="label">产能占比:</span>
-              <span class="text">20%</span>
-            </div>
-            <div class="item">
-              <span class="label">生产数量:</span>
-              <span class="text">8888</span>
-            </div>
-            <div class="item">
-              <span class="label">单位利润:</span>
-              <span class="text">6666</span>
-            </div>
-          </div>
-        </div>
-      </van-action-sheet>
-
-      <van-action-sheet v-model="showTL">
-        <div class="popupTL">
-          <div class="title">
-            当前投料顺序
-          </div>
-          <div class="content">
-            <div class="my-list">
-              <div class="list-item" v-for="(item,index) in lists" :key="index">
-                {{item.text}}
-              </div>
+        <div class="content">
+          <div class="my-list">
+            <div class="list-item" v-for="(item, index) in lists" :key="index">
+              {{ item.text }}
             </div>
           </div>
         </div>
-      </van-action-sheet>
+      </div>
+    </van-action-sheet>
 
-      <van-popup v-model="showPE" position="bottom">
-        <div class="my-popup">
-            <div class="title">设置配额</div> 
-            <div class="content">
-              <van-field
-                v-model="peie1"
-                clearable
-                label="客户A"
-                icon="question-o"
-                placeholder="请输入配额"
-              />
-            <van-field
-              v-model="peie2"
-              clearable
-              label="客户B"
-              icon="question-o"
-              placeholder="请输入配额"
-            />
-            <van-field
-              v-model="peie3"
-              clearable
-              label="客户C"
-              icon="question-o"
-              placeholder="请输入配额"
-            />
-            </div>
-          </div>
-          <van-button class="my-van-button" round size="middle" type="primary" @click="onCalPE"> 确 定 </van-button>
-      </van-popup>
+    <van-popup v-model="showPE" position="bottom">
+      <div class="my-popup">
+        <div class="title">设置配额</div>
+        <div class="content">
+          <van-field v-model="peie1" clearable label="客户A" icon="question-o" placeholder="请输入配额" />
+          <van-field v-model="peie2" clearable label="客户B" icon="question-o" placeholder="请输入配额" />
+          <van-field v-model="peie3" clearable label="客户C" icon="question-o" placeholder="请输入配额" />
+        </div>
+      </div>
+      <van-button class="my-van-button" round size="middle" type="primary" @click="onCalPE"> 确 定 </van-button>
+    </van-popup>
 
   </div>
 </template>
@@ -604,7 +588,8 @@
 <script>
 
 import Charts from '../components/Charts.vue';
-import { Slider, DropdownMenu, DropdownItem, Overlay, Switch, Calendar, Popup } from 'vant';
+import SearchProduction from '../components/SearchOrder.vue';
+import { Slider, DropdownMenu, DropdownItem, Overlay, Switch, Calendar, Popup, Popover } from 'vant';
 import CustomSelect from '../components/CustomSelect.vue'
 import Sortable from 'sortablejs'
 
@@ -647,7 +632,9 @@ export default {
     [Overlay.name]: Overlay,
     [Switch.name]: Switch,
     [Calendar.name]: Calendar,
-    [Popup.name]: Popup
+    [Popup.name]: Popup,
+    [Popover.name]: Popover,
+    SearchProduction
   },
   data() {
     return {
@@ -656,20 +643,21 @@ export default {
         month: "2024-7月",
         amount: 0,
         strategysOption: [
-        { text: '策略', value: 0 },
-        { text: '策略1', value: 1 },
-        { text: '策略2', value: 2 },
-        { text: '策略3', value: 3 },
-      ],
-      ordersOption: [
-        { text: '订单选择', value: 0 },
-        { text: '订单1', value: 1 },
-        { text: '订单2', value: 2 },
-        { text: '订单3', value: 3 }
-      ],
-      strategys: 0,
-      orders: 0,
+          { text: '策略', value: 0 },
+          { text: '策略1', value: 1 },
+          { text: '策略2', value: 2 },
+          { text: '策略3', value: 3 },
+        ],
+        ordersOption: [
+          { text: '订单选择', value: 0 },
+          { text: '订单1', value: 1 },
+          { text: '订单2', value: 2 },
+          { text: '订单3', value: 3 }
+        ],
+        strategys: 0,
+        orders: 0
       },
+      showPopover: false,
       strategysOption: [
         { text: '策略', value: 0 },
         { text: '策略1', value: 1 },
@@ -1076,44 +1064,44 @@ export default {
       check3: false,
       check4: false,
       showQJ: false,
-      dateText:'',
+      dateText: '',
       showDatePicker: false,
       showQJRes: false,
       showStrategy: false,
-      gongshi:'',
-      banci_s:'',
-      banci_e:'',
-      peie:'',
-      customPeie:'',
-      youxianji:'',
-      youxianjiColumns:[
-        {label: "客户优先", value: '1'},
-        {label: "订单优先", value: '2'},
-        {label: "金额优先", value: '3'}
+      gongshi: '',
+      banci_s: '',
+      banci_e: '',
+      peie: '',
+      customPeie: '',
+      youxianji: '',
+      youxianjiColumns: [
+        { label: "客户优先", value: '1' },
+        { label: "订单优先", value: '2' },
+        { label: "金额优先", value: '3' }
       ],
       bancis: '',
-      bancisColumns:[
-        {label: "8", value: '1'},
-        {label: "8+8", value: '2'},
-        {label: "8+8+8", value: '3'}
+      bancisColumns: [
+        { label: "8", value: '1' },
+        { label: "8+8", value: '2' },
+        { label: "8+8+8", value: '3' }
       ],
       bancie: '',
-      bancieColumns:[
-        {label: "8", value: '1'},
-        {label: "8+8", value: '2'},
-        {label: "8+8+8", value: '3'}
+      bancieColumns: [
+        { label: "8", value: '1' },
+        { label: "8+8", value: '2' },
+        { label: "8+8+8", value: '3' }
       ],
       showPE: false,
       peie1: '',
       peie2: '',
       peie3: '',
       lists: [
-        {id:1,text:'订单A'},
-        {id:2,text:'订单B'},
-        {id:3,text:'订单C'},
-        {id:4,text:'订单D'},
-        {id:5,text:'订单E'},
-        {id:6,text:'订单F'}
+        { id: 1, text: '订单A' },
+        { id: 2, text: '订单B' },
+        { id: 3, text: '订单C' },
+        { id: 4, text: '订单D' },
+        { id: 5, text: '订单E' },
+        { id: 6, text: '订单F' }
       ],
       sortable: null,
       showTL: false,
@@ -1130,21 +1118,21 @@ export default {
       this.data.amount = data.amount
     }
   },
-  beforeDestroy(){
+  beforeDestroy() {
     if (this.sortable) {
       this.sortable.destroy()
     }
   },
   methods: {
-    onEnd(evt){
+    onEnd(evt) {
       console.log(evt)
-      const {oldIndex, newIndex} = evt;
-      // 更新数据  
-      // const movedItem = this.lists.splice(oldIndex, 1)[0];  
-      // this.lists.splice(newIndex, 0, movedItem); 
+      const { oldIndex, newIndex } = evt;
+      // 更新数据
+      // const movedItem = this.lists.splice(oldIndex, 1)[0];
+      // this.lists.splice(newIndex, 0, movedItem);
       // this.$forceUpdate()
     },
-    toOrderProgress(){
+    toOrderProgress() {
       this.$router.push({
         path: "/orderProgress"
       })
@@ -1161,68 +1149,74 @@ export default {
         }
       })
     },
-    qujiantongji(){
+    qujiantongji() {
       // 区间统计
+      this.showPopover = false
       this.showQJ = true
     },
-    onClickSetting(){
+    onClickSetting() {
+      this.showPopover = false
       this.showSetting = true
     },
-    onClickHideSetting(){
+    onClickHideSetting() {
       //this.showSetting = false
     },
-    confirmSetting(){
+    confirmSetting() {
       this.showSetting = false
     },
-    formatDate(date){
+    formatDate(date) {
       date = new Date(date);
       var year = date.getFullYear()
       var month = date.getMonth() + 1;
       var day = date.getDate()
       return year + "/" + month + '/' + day
     },
-    onShowDatePicker(){
+    onShowDatePicker() {
       this.showDatePicker = true
     },
-    onCloseDatePicker(){
+    onCloseDatePicker() {
       this.showDatePicker = false
     },
-    onConfirmDatePicker(e){
+    onConfirmDatePicker(e) {
       this.showDatePicker = false
       var s = this.formatDate(e[0])
       var e = this.formatDate(e[1])
       this.dateText = s + '-' + e
     },
-    onCalQJ(){
+    onCalQJ() {
       this.showQJRes = true;
     },
-    onClickHideStrategy(){
+    onClickHideStrategy() {
 
     },
-    onShowStrategy(){
+    onShowStrategy() {
       this.showStrategy = true;
     },
-    confirmStrategy(){
+    confirmStrategy() {
       this.showStrategy = false;
     },
-    onShowPE(){
+    onShowPE() {
       this.showPE = true;
     },
-    onCalPE(){
+    onCalPE() {
       this.showPE = false;
     },
-    onShowTL(){
+    onShowTL() {
       this.showTL = true;
       if (this.isFirstShowTL) {
-        setTimeout(()=>{
-          this.sortable = new Sortable(this.$el.querySelector(".my-list"),{
-          onEnd: this.onEnd
+        setTimeout(() => {
+          this.sortable = new Sortable(this.$el.querySelector(".my-list"), {
+            onEnd: this.onEnd
           })
-        },100)        
+        }, 100)
         this.isFirstShowTL = false
       }
     },
-    addNewOrder(){
+    onOrderChange() {
+      this.$refs.itemRef.toggle();
+      console.log("order-change");
+    },
+    addNewOrder() {
       this.$router.push({
         path: "/publish-order"
       })

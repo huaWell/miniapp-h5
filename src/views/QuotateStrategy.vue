@@ -47,10 +47,15 @@
         }
         .item{
             margin-top: 6px;
-            
+            padding: 0 60px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
             .title{
                 height: 22px;
-                font-size: 14px;
+                font-size: 16px;
             }
             .title::before{
                 content: '•';
@@ -58,7 +63,7 @@
                 color: rgb(113, 223, 223);
             }
             .item-content{
-                font-size: 12px;
+                font-size: 14px;
                 .info{
                     padding-left: 6px;
                     box-sizing: border-box;
@@ -145,7 +150,7 @@
             <div class="strategy-setting">
                 <van-icon color="#1989fa" name="setting" />
             </div>
-          
+
             <van-radio-group v-model="radio"  @change="onChange" style="padding: 16px;font-size:14px">
             <van-radio name="1" icon-size="16">报价策略A</van-radio>
             <van-radio name="2" icon-size="16">报价策略B</van-radio>
@@ -216,7 +221,7 @@
         </div>
 
         <van-button class="my-van-button" round size="large" type="primary" @click="onGenerator"> 计算 </van-button>
-   
+
         <van-action-sheet v-model="showInfo">
             <div class="model">
                 <div class="model-title">该模块需以下条件可解锁:</div>
