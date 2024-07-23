@@ -47,7 +47,7 @@
         }
         .item{
             margin-top: 6px;
-            padding: 0 60px;
+            padding-right: 120px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
