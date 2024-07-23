@@ -161,8 +161,7 @@
 
 <template>
   <div class="container">
-    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o"
-      text="订单xx, 需要紧急处理！详细描述：xxx员工对xx设备做出了错误操作,请尽快处理。" />
+    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" :text="announcement" />
 
     <div class="card">
       <div class="title">
@@ -190,10 +189,11 @@
           最近待办
         </div>
       </div>
-      <div class="todo" v-for="(todo, index) in  todos ">
-        <div v-if="todo.color ? true : false" class="img" :style="{ backgroundColor: todo.color }"></div>
-        <van-icon v-if="todo.icon ? true : false" :name="todo.icon" />
-        <div class="content">{{ todo.text }}</div>
+      <div class="grid">
+        <div class="item" v-for="( card, index ) in  todos ">
+          <div class="title">{{ card.title }}</div>
+          <div class="value">{{ card.value }}</div>
+        </div>
       </div>
     </div>
 
@@ -216,6 +216,7 @@
 
 <script>
 import { NoticeBar } from 'vant';
+import { get_homepage_announcement } from '@/modules/api.js';
 
 const colorConfig = {
   red: "#bc4749",
@@ -257,23 +258,25 @@ export default {
         }
       ],
 
+      announcement: "订单xx, 需要紧急处理！详细描述：xxx员工对xx设备做出了错误操作,请尽快处理。",
+
       todos: [
         {
-          color: colorConfig.red,
-          text: "客户X - 订单XXX 延误N天"
+          title: "待审核",
+          value: "10"
         },
         {
-          color: colorConfig.yellow,
-          text: "销售员A对您发起销售配额上限审批"
+          title: "待决策",
+          value: "25"
         },
         {
-          color: colorConfig.green,
-          text: "针对某事件 需要您执行方案决策"
+          title: "通知",
+          value: "2"
         },
         {
-          icon: "shop-o",
-          text: "更多"
-        }
+          title: "其他",
+          value: "10"
+        },
       ],
 
       cards: [
@@ -305,7 +308,8 @@ export default {
     }
   },
   async mounted() {
-    // this.rate = 70;
+    const res = await get_homepage_announcement();
+    this.announcement = res;
   },
   methods: {}
 }

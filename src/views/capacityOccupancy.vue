@@ -322,12 +322,12 @@
         </div>
         <div class="label">自定义投料</div>
       </div>
-      <div class="item" @click="onSetQuotateStrategy" >
+      <!-- <div class="item" @click="onSetQuotateStrategy">
         <div class="text">
           <van-icon color="#1989fa" name="refund-o" />
         </div>
         <div class="label">定价</div>
-      </div>
+      </div> -->
       <div class="item" @click="addNewOrder">
         <div class="text">
           <van-icon color="#1989fa" name="add-o" />
@@ -387,13 +387,18 @@
       </van-tabs>
     </div>
 
-    <div class="card" style="height: 300px;">
+    <div class="card" style="height: 400px;">
       <div class="title">
         <div class="value">
           FCST 销售
         </div>
       </div>
       <Charts :options="option5" chartId="chart6" />
+      <van-tabs type="card">
+        <van-tab title="周"></van-tab>
+        <van-tab title="旬"></van-tab>
+        <van-tab title="月"></van-tab>
+      </van-tabs>
     </div>
 
     <div class="card" style="height: 300px;">
@@ -970,6 +975,7 @@ export default {
         tooltip: {
           trigger: 'axis'
         },
+        grid,
         legend: {
           data: [
             '实际',
@@ -1006,54 +1012,60 @@ export default {
             ]
           },
           {
+            name: '实际',
+            type: 'line',
+            data: [
+              2.0, 6.9, 13.9, 37.1, 62.7, 139.4
+            ]
+          },
+          {
             name: '预测',
             type: 'bar',
             data: [
-              2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6
+              2.6, 5.9, 9.0, 26.4, 28.7, 80.7, 175.6
             ],
             itemStyle: {
               color: 'transparent',
               borderColor: '#165DFF',
               borderType: 'dashed'
             },
+          },
+          {
+            name: '预测',
+            type: 'line',
+            lineStyle: {
+              type: "dashed"
+            },
+            data: [
+              2.6, 8.5, 17.5, 43.9, 72.6, 153.3, 318.9
+            ],
           }
         ]
       },
 
       option6: {
-        xAxis: {
-          type: 'category',
-          data: months
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          }
-        },
         grid,
-        yAxis: {
-          type: 'value'
-        },
         series: [
           {
-            data: [20, 50, 45, 28, 35, 47, 26],
-            type: 'line',
-            markLine: {
-              symbol: "none",
-              label: {
-                show: true,  // 显示标签
-                position: 'insideEndTop', // 标签显示在终点处
-                formatter: '{b} {c}%' // 使用名称作为标签内容
-              },
-              data: [
-                {
-                  type: 'average',
-                  name: '平均'
-
-                }
-              ]
-            }
+            name: 'Access From',
+            type: 'pie',
+            radius: ['0', '60'],
+            label: {
+              show: true,
+              position: 'outside',
+              alignTo: 'labelLine',
+              formatter: '{b}: {d}%'
+            },
+            labelLine: {
+              showAbove: true,
+              length: 5,
+              length2: 40
+            },
+            data: [
+              { value: 45, name: '利润分类1' },
+              { value: 30, name: '利润分类2' },
+              { value: 25, name: '利润分类3' }
+            ]
           }
         ]
       },

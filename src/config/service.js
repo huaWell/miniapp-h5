@@ -1,11 +1,12 @@
 export default {
 	'development': {
-		baseURL: 'https://www.xzcricle.com/recyclebackend/',
+		// baseURL: 'http://172.21.1.85:7085/wechat/',
+		baseURL: 'https://wecomcheck.bugongsoft.com/wechat/',
 		recycleURL: "https://www.xzcricle.com/recycle/",
-		objectURL:'https://data.xzcricle.com/'	
+		objectURL:'https://data.xzcricle.com/'
 	},
 	'production': {
-		baseURL: 'https://www.xzcricle.com/recyclebackend',
+		baseURL: 'https://wecomcheck.bugongsoft.com/wechat/',
 		recycleURL: "https://www.xzcricle.com/recycle/"	,
 		objectURL:'https://data.xzcricle.com/'
 	}
