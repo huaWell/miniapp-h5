@@ -54,7 +54,7 @@
                 <van-checkbox name="00" @click="unToggleAll" v-model="unCheckedAll" />
               </template>
             </van-cell>
-  
+
             <van-checkbox-group
               :max="max"
               v-model="checkboxValue"
@@ -80,14 +80,14 @@
       </div>
     </div>
 </template>
-  
+
   <script>
   import { Popup } from 'vant'
   export default {
     name: 'CustomSelect',
-    // model: {
-    //   prop: 'selectValue'
-    // },
+    model: {
+      prop: 'selectValue'
+    },
     components: {
         [Popup.name]: Popup
     },
@@ -145,7 +145,7 @@
           return resLabel.join(',')
         },
         set() {
-  
+
         }
       }
     },
@@ -249,6 +249,5 @@
     }
   }
   </script>
-  
-  
-  
+
+

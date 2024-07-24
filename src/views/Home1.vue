@@ -138,14 +138,14 @@
     justify-content: center;
     align-items: center;
 
-    .img-box {
-      width: 50%;
-      height: 60%;
-    }
+    // .img-box {
+    //   width: 50%;
+    //   height: 60%;
+    // }
 
     .img-box-img {
-      width: 100%;
-      height: 100%;
+      width: 48px;
+      height: 48px;
       display: block;
       border-radius: 4px;
     }
@@ -171,11 +171,10 @@
         </div>
       </div>
       <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
-        <div class="item" style="height: 70px;background-color: transparent;" v-for="(item, index) in items"
+        <div class="item" style="height: 80px;background-color: transparent;" v-for="(item, index) in items"
           @click="item.click">
-          <div class="img-box" v-if="item.text != '...'">
-            <img class="img-box-img"
-              src="https://img2.baidu.com/it/u=1421951440,2958002268&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=390"></img>
+          <div class="img-box" v-if="item.src != undefined">
+            <img class="img-box-img" :src="item.src"></img>
           </div>
           <div class="text">{{ item.text }}</div>
         </div>
@@ -217,6 +216,9 @@
 <script>
 import { NoticeBar } from 'vant';
 import { get_homepage_announcement } from '@/modules/api.js';
+import capacityImg from '@/assets/capacity.png';
+import orderImg from '@/assets/order.png';
+import supplyChainImg from '@/assets/supplyChain.png';
 
 const colorConfig = {
   red: "#bc4749",
@@ -234,6 +236,7 @@ export default {
       items: [
         {
           text: "订单态势",
+          src: orderImg,
           click: () => {
             this.$router.push({
               path: '/order-stats'
@@ -242,6 +245,7 @@ export default {
         },
         {
           text: "产能态势",
+          src: capacityImg,
           click: () => {
             wx.miniProgram.switchTab({
               url: `/pages/webview/main`
@@ -250,6 +254,7 @@ export default {
         },
         {
           text: "供应态势",
+          src: supplyChainImg,
           click() { }
         },
         {

@@ -41,7 +41,7 @@
         }
       }
     }
-    
+
     .list{
       margin-top: 16px;
       .item {
@@ -92,7 +92,7 @@
             color: #000;
           }
         }
-      
+
       }
     }
     .model{
@@ -225,7 +225,7 @@
 <template>
     <div class="object-list-container">
       <div class="header">
-        <van-search style="border-top-right-radius:30px;flex:1" v-model="productionName" placeholder="搜索订单" shape="round"  @focus="onSearchProduct">
+        <van-search style="border-top-right-radius:30px;flex:1" v-model="productionName" placeholder="搜索订单/客户" shape="round"  @focus="onSearchProduct">
         </van-search>
         <div @click="onShowFilter">
           <van-icon name="filter-o" />
@@ -286,7 +286,7 @@
                   style="position: absolute;" />
               </div>
             </div>
-          
+
           </div>
         </div>
 
@@ -309,9 +309,9 @@
           </div>
         </div>
         </div>
-      
+
       </van-action-sheet>
-    
+
       <van-overlay @click="onClickHideFilter" :show="showFilter">
         <div class="filter">
           <div class="item" v-for="(item,index) in filters" :key="index">
@@ -440,7 +440,7 @@ export default {
           {"lineSerial": "订单条目序列号3","productionName": "产品3","materialName": "物料3","startDate": "2024-07-16",
           "releaseDate": "2024-09-01","calReleaseDate": "2024-08-01","ratio":"50%","fyRatio": "40","status":2}
         ]
-    },  
+    },
     methods: {
       onSearchProduct(){
         this.$router.push({

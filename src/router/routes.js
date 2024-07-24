@@ -284,5 +284,14 @@ export default [
     meta: {
       title: ''
     }
+  },
+  {
+    path: '/FCSTDetail',
+    name: 'FCSTDetail',
+    component: () =>
+      import('../views/FCSTDetail'),
+    meta: {
+      title: ''
+    }
   }
 ]

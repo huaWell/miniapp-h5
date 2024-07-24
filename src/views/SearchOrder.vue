@@ -92,7 +92,7 @@
     <div class="search-panel">
         <van-search
             v-model="value"
-            placeholder="请输入产品名/模板"
+            placeholder="请输入订单/客户"
             shape="round"
             focus="true"
             use-action-slot
@@ -114,7 +114,7 @@
         <div class="title-panel">
             <div class="title">历史搜索</div>
         </div>
-       
+
         <div class="my-tags-wrapper">
             <div class="my-tag text-overflow--1" v-for="(tag,index) in searchHistory" :key="index" @click="chooseHistoryTag(tag, index)">
                 {{ tag }}
@@ -160,7 +160,7 @@ export default {
         this.searchHistory = searchHistory ? JSON.parse(searchHistory) : []
     },
     created(){
-        
+
     },
     onLoad(options){
     },
@@ -218,11 +218,11 @@ export default {
             console.log(this.searchHistory)
             localStorage.setItem("searchOrderHistory", JSON.stringify(this.searchHistory))
         },
-        onSearch(e){ 
+        onSearch(e){
             let params_1 = {value: this.value};
             let params_2 = {
-                    value: this.value, 
-                    rootCategory: this.rootCategory, 
+                    value: this.value,
+                    rootCategory: this.rootCategory,
                     category: this.category,
                     rootCategoryId: this.rootCategoryId,
                     categoryId: this.categoryId,
@@ -232,7 +232,7 @@ export default {
 
             this.addHistory(this.value);
             this.closeSearchPanel();
-            
+
         },
         chooseHistoryTag(tag, index){
             this.currentHistoryTagIndex = index;
@@ -258,9 +258,9 @@ export default {
             this.rootCategory = "";
             this.category = "";
         }
-      
+
     }
-        
+
 }
 
 </script>

@@ -44,164 +44,207 @@
     gap: 4px;
   }
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: #fff;
+
+  .item {
+    background-color: #f1f5fa;
+    border-radius: 4px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+
+    .img-box {
+      width: 50%;
+      height: 60%;
+    }
+
+    .img-box-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .text {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}
 </style>
 
 <template>
   <div class="container">
-    <van-tree-select :items="items" :main-active-index="mainActiveIndex" :active-id="activeId" :max="max"
-      @click-nav="onClickNav" @click-item="onClickItem" />
+    <!-- <van-tree-select :items="items" :main-active-index="mainActiveIndex" :active-id="activeId" :max="max"
+      @click-nav="onClickNav" @click-item="onClickItem" /> -->
 
-    <div class="card" style="height: 28vh;">
+    <div class="card" v-for="(item, index) in categories" style="height: 28vh;" @click="onCategoryClick(item)">
       <div class="title">
         <div class="value">
-          产品分类
+          {{ item.label }}
         </div>
       </div>
-      <Charts :options="option1" chartId="chart1" />
-    </div>
-    <div class="card" style="height: 28vh">
-      <div class="title">
-        <div class="value">
-          异常情况
-        </div>
-      </div>
-      <Charts :options="option2" chartId="chart2" />
-    </div>
-    <div class="card" style="height: 28vh;">
-      <div class="title">
-        <div class="value">
-          异常原因
-        </div>
-      </div>
-      <Charts :options="option3" chartId="chart3" />
-    </div>
-    <div class="card" style="height: 28vh;">
-      <div class="title">
-        <div class="value">
-          客户分类
-        </div>
-      </div>
-      <Charts :options="option4" chartId="chart3" />
+      <Charts :options="item.option" :chartId="'chart' + (index + 1)" />
     </div>
     <div style="position: fixed;bottom: 20px;width: 100vw;">
       <van-button class="my-van-button" round size="middle" type="primary" @click="toOrderList"> 订单列表 </van-button>
     </div>
+
+    <van-popup v-model="showPopup" position="bottom">
+      <div class="card">
+        <div class="title">
+          <div class="value">{{ popupTitle }}</div>
+        </div>
+        <div class="grid">
+          <div class="item" v-for="( card, index ) in  cards " @click="toOrderList">
+            <div class="title">{{ card.name }}</div>
+            <div class="value">{{ card.value }}</div>
+          </div>
+        </div>
+      </div>
+
+    </van-popup>
 
   </div>
 </template>
 
 <script>
 import Charts from '../components/Charts.vue';
+import { Popup } from 'vant';
 
 export default {
   name: "orderStats",
   components: {
     Charts,
+    [Popup.name]: Popup
   },
   data() {
     return {
-      option1: {
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['0', '60'],
-            label: {
-              show: true,
-              position: 'outside',
-              alignTo: 'labelLine',
-              formatter: '{b}: {d}%'
-            },
-            labelLine: {
-              showAbove: true,
-              length: 5,
-              length2: 40
-            },
-            data: [
-              { value: 30, name: '产品1' },
-              { value: 30, name: '产品2' },
-              { value: 20, name: '产品3' },
-              { value: 10, name: '产品4' },
-              { value: 10, name: '其它' }
+      cards: [],
+      categories: [
+        {
+          label: "产品分类",
+          option: {
+            series: [
+              {
+                name: 'Access From',
+                type: 'pie',
+                radius: ['0', '60'],
+                label: {
+                  show: true,
+                  position: 'outside',
+                  alignTo: 'labelLine',
+                  formatter: '{b}: {d}%'
+                },
+                labelLine: {
+                  showAbove: true,
+                  length: 5,
+                  length2: 40
+                },
+                data: [
+                  { value: 30, name: '产品1' },
+                  { value: 30, name: '产品2' },
+                  { value: 20, name: '产品3' },
+                  { value: 10, name: '产品4' },
+                  { value: 10, name: '其它' }
+                ]
+              }
+            ]
+          },
+        },
+        {
+          label: "异常情况",
+          option: {
+            series: [
+              {
+                name: 'Access From',
+                type: 'pie',
+                radius: ['0', '60'],
+                label: {
+                  show: true,
+                  position: 'outside',
+                  alignTo: 'labelLine',
+                  formatter: '{b}: {d}%'
+                },
+                labelLine: {
+                  showAbove: true,
+                  length: 5,
+                  length2: 40
+                },
+                data: [
+                  { value: 60, name: '轻微延迟' },
+                  { value: 30, name: '严重延迟' },
+                  { value: 10, name: '其它' }
+                ]
+              }
             ]
           }
-        ]
-      },
-      option2: {
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['0', '60'],
-            label: {
-              show: true,
-              position: 'outside',
-              alignTo: 'labelLine',
-              formatter: '{b}: {d}%'
-            },
-            labelLine: {
-              showAbove: true,
-              length: 5,
-              length2: 40
-            },
-            data: [
-              { value: 60, name: '轻微延迟' },
-              { value: 30, name: '严重延迟' },
-              { value: 10, name: '其它' }
+        },
+        {
+          label: "异常原因",
+          option: {
+            series: [
+              {
+                name: 'Access From',
+                type: 'pie',
+                radius: ['0', '60'],
+                label: {
+                  show: true,
+                  position: 'outside',
+                  alignTo: 'labelLine',
+                  formatter: '{b}: {d}%'
+                },
+                labelLine: {
+                  showAbove: true,
+                  length: 5,
+                  length2: 40
+                },
+                data: [
+                  { value: 40, name: '插单' },
+                  { value: 40, name: '飞单' },
+                  { value: 20, name: '其它' }
+                ]
+              }
             ]
           }
-        ]
-      },
-      option3: {
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['0', '60'],
-            label: {
-              show: true,
-              position: 'outside',
-              alignTo: 'labelLine',
-              formatter: '{b}: {d}%'
-            },
-            labelLine: {
-              showAbove: true,
-              length: 5,
-              length2: 40
-            },
-            data: [
-              { value: 40, name: '插单' },
-              { value: 40, name: '飞单' },
-              { value: 20, name: '其它' }
+        },
+        {
+          label: "客户分类",
+          option: {
+            series: [
+              {
+                name: 'Access From',
+                type: 'pie',
+                radius: ['0', '60'],
+                label: {
+                  show: true,
+                  position: 'outside',
+                  alignTo: 'labelLine',
+                  formatter: '{b}: {d}%'
+                },
+                labelLine: {
+                  showAbove: true,
+                  length: 5,
+                  length2: 40
+                },
+                data: [
+                  { value: 45, name: '客户分类1' },
+                  { value: 30, name: '客户分类2' },
+                  { value: 25, name: '客户分类13' }
+                ]
+              }
             ]
           }
-        ]
-      },
-      option4: {
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['0', '60'],
-            label: {
-              show: true,
-              position: 'outside',
-              alignTo: 'labelLine',
-              formatter: '{b}: {d}%'
-            },
-            labelLine: {
-              showAbove: true,
-              length: 5,
-              length2: 40
-            },
-            data: [
-              { value: 45, name: '客户分类1' },
-              { value: 30, name: '客户分类2' },
-              { value: 25, name: '客户分类13' }
-            ]
-          }
-        ]
-      },
+        }
+      ],
       mainActiveIndex: 0,
       activeId: [],
       max: 2,
@@ -238,7 +281,10 @@ export default {
         { id: 22, name: "A1", text: "1-1000万" },
         { id: 23, name: "A1", text: "1000-3000万" },
         { id: 24, name: "A1", text: ">3000万" }]
-      }]
+      }],
+      popupData: [],
+      showPopup: false,
+      popupTitle: ""
     }
   },
   mounted() {
@@ -262,6 +308,13 @@ export default {
       } else {
         this.activeId.push(item.id)
       }
+    },
+    onCategoryClick(item) {
+      const data = item.option.series[0].data;
+      this.cards = data;
+      this.showPopup = true;
+      this.popupTitle = item.label;
+      console.log(data);
     }
   }
 }

@@ -387,7 +387,7 @@
       </van-tabs>
     </div>
 
-    <div class="card" style="height: 400px;">
+    <div class="card" style="height: 400px;" @click="toFCSTDetail">
       <div class="title">
         <div class="value">
           FCST 销售
@@ -1026,7 +1026,7 @@ export default {
             ],
             itemStyle: {
               color: 'transparent',
-              borderColor: '#165DFF',
+              borderColor: colorConfig.blue,
               borderType: 'dashed'
             },
           },
@@ -1034,7 +1034,8 @@ export default {
             name: '预测',
             type: 'line',
             lineStyle: {
-              type: "dashed"
+              type: "dashed",
+              color: colorConfig.blue  // 修改折线颜色
             },
             data: [
               2.6, 8.5, 17.5, 43.9, 72.6, 153.3, 318.9
@@ -1085,19 +1086,19 @@ export default {
       banci_e: '',
       peie: '',
       customPeie: '',
-      youxianji: '',
+      youxianji: [],
       youxianjiColumns: [
         { label: "客户优先", value: '1' },
         { label: "订单优先", value: '2' },
         { label: "金额优先", value: '3' }
       ],
-      bancis: '',
+      bancis: [],
       bancisColumns: [
         { label: "8", value: '1' },
         { label: "8+8", value: '2' },
         { label: "8+8+8", value: '3' }
       ],
-      bancie: '',
+      bancie: [],
       bancieColumns: [
         { label: "8", value: '1' },
         { label: "8+8", value: '2' },
@@ -1147,6 +1148,11 @@ export default {
     toOrderProgress() {
       this.$router.push({
         path: "/orderProgress"
+      })
+    },
+    toFCSTDetail() {
+      this.$router.push({
+        path: "/FCSTDetail"
       })
     },
     onSetQuotateStrategy() {
