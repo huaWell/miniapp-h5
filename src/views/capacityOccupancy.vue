@@ -302,7 +302,7 @@
       <!-- <Select label="测试" title-width="70" place="请选择" list="{{testList}}"></Select> -->
 
       <van-dropdown-menu active-color="#ACADBB">
-        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption" />
+        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption"/>
         <van-dropdown-item title="订单选择" ref="itemRef">
           <SearchProduction @item-click="onOrderChange" />
         </van-dropdown-item>
@@ -611,6 +611,21 @@ const rawData = [
   [38, 29, 26, 22, 18, 25, 17],
   [18, 30, 29, 25, 39, 19, 30],
 ];
+
+
+const rawData1 = [
+  [20, 25, 19, 13, 8, 6, 3],
+  [20, 25, 15, 31, 14, 15, 8],
+  [10, 40, 21, 10, 22, 10, 2],
+];
+
+
+const rawData2 = [
+  [20, 25, 19, 13, 8, 6, 3],
+  [40, 30, 27, 18, 10, 22, 2],
+  [5, 20, 40, 30, 18, 19, 8],
+];
+
 const totalData = [];
 for (let i = 0; i < rawData[0].length; ++i) {
   let sum = 0;
@@ -664,7 +679,6 @@ export default {
       },
       showPopover: false,
       strategysOption: [
-        { text: '策略', value: 0 },
         { text: '策略1', value: 1 },
         { text: '策略2', value: 2 },
         { text: '策略3', value: 3 },
@@ -675,7 +689,7 @@ export default {
         { text: '订单2', value: 2 },
         { text: '订单3', value: 3 }
       ],
-      strategys: 0,
+      strategys: 1,
       orders: 0,
       value: 95,
       option: {
@@ -1238,6 +1252,19 @@ export default {
       this.$router.push({
         path: "/publish-order"
       })
+    }
+  },
+  watch: {
+    strategys(newVal, oldVal) {
+      if(newVal == oldVal) return;
+      const data = {
+        1: rawData,
+        2: rawData1,
+        3: rawData2
+      }
+      const rd = data[newVal];
+      this.option.series[1].data = rd[1];
+      this.option.series[2].data = rd[2];
     }
   }
 }
