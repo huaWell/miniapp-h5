@@ -94,9 +94,9 @@
       </div>
       <Charts :options="item.option" :chartId="'chart' + (index + 1)" />
     </div>
-    <div style="position: fixed;bottom: 20px;width: 100vw;">
+    <!-- <div style="position: fixed;bottom: 20px;width: 100vw;">
       <van-button class="my-van-button" round size="middle" type="primary" @click="toOrderList"> 订单列表 </van-button>
-    </div>
+    </div> -->
 
     <van-popup v-model="showPopup" position="bottom">
       <div class="card">
