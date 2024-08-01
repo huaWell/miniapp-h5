@@ -258,31 +258,12 @@
 
 <template>
   <div class="object-list-container">
-    <div class="header">
-      <van-search style="border-top-right-radius:30px;flex:1" v-model="productionName" placeholder="搜索订单/客户"
-        shape="round" @focus="onSearchProduct">
-      </van-search>
-      <div @click="onShowFilter">
-        <van-icon name="filter-o" />
-      </div>
-    </div>
-
     <div class="content">
-      <div class="stats">
-        <div class="item">
-          <div class="text">120</div>
-          <div class="label">全部</div>
-        </div>
-        <div class="item">
-          <div class="text">60</div>
-          <div class="label">已完成</div>
-        </div>
-        <div class="item">
-          <div class="text">50%</div>
-          <div class="label">完成率</div>
-        </div>
-      </div>
-
+      <van-tabs v-model="active">
+        <van-tab title="全部"></van-tab>
+        <van-tab title="异常状态"></van-tab>
+        <van-tab title="已完成"></van-tab>
+      </van-tabs>
       <div class="list">
         <div class="item" v-for="(list, index) in lists" :key="index">
           <div class="serial">
@@ -298,11 +279,11 @@
               </div>
               <div class="name">{{ list.lineSerial }}</div>
             </div>
-            <div class="right">
+            <!-- <div class="right">
               <div>
                 <van-icon :name="list.collect ? 'star' : 'star-o'" color="#d8d250" @click="onStarClick(list)" />
               </div>
-            </div>
+            </div> -->
 
           </div>
           <div class="title">
@@ -325,8 +306,8 @@
               </div>
             </div>
             <div style="width: 50px;height: 50px;" @click="onShowDetail(list)">
-              <van-circle size="50" :value="25" layer-color="#D7E3FD" color="#3775F6" stroke-width="6" :text="list.ratio"
-                style="position: absolute;" />
+              <van-circle size="50" :value="25" layer-color="#D7E3FD" color="#3775F6" stroke-width="6"
+                :text="list.ratio" style="position: absolute;" />
             </div>
           </div>
 
@@ -334,114 +315,6 @@
       </div>
 
     </div>
-
-    <div class="fixPanel">
-      <van-button class="btn btn1" @click="showWarn = true">发消息</van-button>
-      <van-button class="btn btn2" @click="showWarn = true">打电话</van-button>
-    </div>
-
-    <van-action-sheet v-model="showInfo">
-      <div class="model">
-        <div class="title">发运进度</div>
-        <div class="fayun">
-          <div style="flex: 1;">
-            <van-progress percentage="30" />
-          </div>
-          <div @click="onShowWarn">
-            <van-icon name="warn-o" />
-          </div>
-        </div>
-      </div>
-
-    </van-action-sheet>
-
-    <van-overlay @click="onClickHideFilter" :show="showFilter">
-      <div class="filter">
-        <div class="item" v-for="(item, index) in filters" :key="index">
-          <div class="title">{{ item.title }}</div>
-          <div class="tags">
-            <div class="tag" v-for="(tag, idx) in item.tags" :key="idx">
-              {{ tag }}
-            </div>
-          </div>
-        </div>
-
-        <div class="footer">
-          <van-button size="small" plain hairline type="primary"> 重 置 </van-button>
-          <van-button size="small" type="primary"> 确 定 </van-button>
-        </div>
-      </div>
-    </van-overlay>
-
-    <van-action-sheet v-model="showFYWarn">
-      <div class="model">
-        <div class="model-title">该模块需以下条件可解锁:</div>
-        <div class="model-item">
-          需接入机器及物流信息
-        </div>
-      </div>
-    </van-action-sheet>
-
-    <van-action-sheet v-model="showWarn">
-      <div class="model">
-        <div class="model-title">该模块需以下条件可解锁:</div>
-        <div class="model-item">
-          需接入OA系统
-        </div>
-      </div>
-    </van-action-sheet>
-
-    <van-overlay @click="onClickHideDetail" :show="showDetail">
-      <div class="detail" v-if="orderStatus == 1">
-        <div class="title">
-          延误详情
-        </div>
-        <div class="content">
-          <div class="item">
-            <span class="label">延误天数:</span>
-            <span class="text">5</span>
-          </div>
-          <div class="item">
-            <span class="label">数量:</span>
-            <span class="text">500</span>
-          </div>
-          <div class="item">
-            <span class="label">生产车间1机器出现故障</span>
-          </div>
-        </div>
-      </div>
-      <div class="detail" v-if="orderStatus == 0">
-        <div class="title">
-          按时完成
-        </div>
-        <div class="content">
-          <div class="item">
-            <span class="label">生产:</span>
-            <span class="text">500</span>
-          </div>
-          <div class="item">
-            <span class="label">发运:</span>
-            <span class="text">500</span>
-          </div>
-        </div>
-      </div>
-      <div class="detail" v-if="orderStatus == 2">
-        <div class="title">
-          超额完工
-        </div>
-        <div class="content">
-          <div class="item">
-            <span class="label">富余产能:</span>
-            <span class="text">500</span>
-          </div>
-          <div class="item">
-            <span class="label">物流:</span>
-            <span class="text">400</span>
-          </div>
-        </div>
-      </div>
-    </van-overlay>
-
   </div>
 </template>
 
@@ -461,20 +334,8 @@ export default {
   },
   data() {
     return {
-      productionName: '',
       lists: [],
-      showFY: true,
-      showInfo: false,
-      showFilter: false,
-      showFYWarn: false,
-      showDetail: false,
-      showWarn: false,
-      filters: [
-        { title: "按时间", tags: ["近一日", "2023", "2022"] },
-        { title: "按类型", tags: ["自制", "外购", "客供", "成品委外"] },
-        { title: "按状态", tags: ["异常", "未完成", "重点关注"] }
-      ],
-      orderStatus: 0
+      active: 0
     }
   },
   async mounted() {

@@ -210,6 +210,16 @@
   .title {}
 
   .content {}
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left {}
+
+    .right {}
+  }
 }
 
 .popupRes {
@@ -270,7 +280,27 @@
 
 .my-popup {
   padding: 20px;
-  box-sizing: border-box
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+
+  .item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .text {}
+
+  .disable {
+    color: #ddd
+  }
 }
 
 .list-item {
@@ -302,7 +332,7 @@
       <!-- <Select label="测试" title-width="70" place="请选择" list="{{testList}}"></Select> -->
 
       <van-dropdown-menu active-color="#ACADBB">
-        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption"/>
+        <van-dropdown-item custom-class="my-dropdown-menu" v-model="strategys" :options="strategysOption" />
         <van-dropdown-item title="订单选择" ref="itemRef">
           <SearchProduction @item-click="onOrderChange" />
         </van-dropdown-item>
@@ -387,13 +417,18 @@
       </van-tabs>
     </div>
 
-    <div class="card" style="height: 400px;" @click="toFCSTDetail">
+    <div class="card" style="height: 400px;">
       <div class="title">
         <div class="value">
           FCST 销售
         </div>
+        <div class="bar">
+          <van-button icon="browsing-history" size="small" @click="onShowAnalyze" />
+        </div>
       </div>
-      <Charts :options="option5" chartId="chart6" />
+      <div @click="toFCSTDetail" style="flex: 1;">
+        <Charts :options="option5" chartId="chart6" />
+      </div>
       <van-tabs type="card">
         <van-tab title="周"></van-tab>
         <van-tab title="旬"></van-tab>
@@ -587,6 +622,21 @@
       <van-button class="my-van-button" round size="middle" type="primary" @click="onCalPE"> 确 定 </van-button>
     </van-popup>
 
+    <van-popup v-model="showAnalyze" position="bottom">
+      <div class="my-popup">
+        <div class="title">分析</div>
+        <div class="item">
+          <div class="text">产销偏差：</div>
+          <van-tag plain type="primary">8分</van-tag>
+          <van-tag type="danger">严重</van-tag>
+        </div>
+        <div class="item">
+          <div class="text">推荐方案：</div>
+          <div class="disable">待解锁</div>
+        </div>
+      </div>
+    </van-popup>
+
   </div>
 </template>
 
@@ -594,7 +644,7 @@
 
 import Charts from '../components/Charts.vue';
 import SearchProduction from '../components/SearchOrder.vue';
-import { Slider, DropdownMenu, DropdownItem, Overlay, Switch, Calendar, Popup, Popover } from 'vant';
+import { Slider, DropdownMenu, DropdownItem, Overlay, Switch, Calendar, Popup, Popover, Tag } from 'vant';
 import CustomSelect from '../components/CustomSelect.vue'
 import Sortable from 'sortablejs'
 
@@ -654,6 +704,7 @@ export default {
     [Calendar.name]: Calendar,
     [Popup.name]: Popup,
     [Popover.name]: Popover,
+    [Tag.name]: Tag,
     SearchProduction
   },
   data() {
@@ -678,6 +729,7 @@ export default {
         orders: 0
       },
       showPopover: false,
+      showAnalyze: false,
       strategysOption: [
         { text: '策略1', value: 1 },
         { text: '策略2', value: 2 },
@@ -991,18 +1043,6 @@ export default {
         },
         grid,
         legend: {
-          data: [
-            '实际',
-            {
-              name: '预计',
-              itemStyle: {
-                borderType: 'dashed',
-                borderWidth: 1,
-                color: 'transparent',
-                borderColor: '#EA5B3A'
-              }
-            }
-          ]
         },
         calculable: true,
         xAxis: [
@@ -1020,29 +1060,10 @@ export default {
         series: [
           {
             name: '实际',
-            type: 'bar',
-            data: [
-              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 0
-            ]
-          },
-          {
-            name: '实际',
             type: 'line',
             data: [
               2.0, 6.9, 13.9, 37.1, 62.7, 139.4
             ]
-          },
-          {
-            name: '预测',
-            type: 'bar',
-            data: [
-              2.6, 5.9, 9.0, 26.4, 28.7, 80.7, 175.6
-            ],
-            itemStyle: {
-              color: 'transparent',
-              borderColor: colorConfig.blue,
-              borderType: 'dashed'
-            },
           },
           {
             name: '预测',
@@ -1252,11 +1273,14 @@ export default {
       this.$router.push({
         path: "/publish-order"
       })
+    },
+    onShowAnalyze() {
+      this.showAnalyze = true;
     }
   },
   watch: {
     strategys(newVal, oldVal) {
-      if(newVal == oldVal) return;
+      if (newVal == oldVal) return;
       const data = {
         1: rawData,
         2: rawData1,
