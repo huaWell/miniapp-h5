@@ -679,9 +679,9 @@ export default {
       },
       showPopover: false,
       strategysOption: [
-        { text: '策略1', value: 1 },
-        { text: '策略2', value: 2 },
-        { text: '策略3', value: 3 },
+        { text: '策略_1', value: 1 },
+        { text: '策略_2', value: 2 },
+        { text: '策略_3', value: 3 },
       ],
       ordersOption: [
         { text: '订单选择', value: 0 },
