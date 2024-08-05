@@ -293,5 +293,14 @@ export default [
     meta: {
       title: ''
     }
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: () =>
+      import('../views/Order'),
+    meta: {
+      title: ''
+    }
   }
 ]
